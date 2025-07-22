@@ -74,6 +74,38 @@ const HomeTwo = () => {
       return updatedSelectedItems;
     });
   };
+   const clientSlider = {
+    dots: false,
+    autoplay: false,
+    slidesToShow: 3,
+    speed: 500,
+    responsive: [
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 776,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 567,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
   return (
     <>
       {/* <HeaderTwo /> */}
@@ -110,9 +142,9 @@ const HomeTwo = () => {
               <div className="row">
                 <div className="col-l-10 col-md-11 mx-auto">
                   <h1>
-                    Worlds Largest <span>Marketplace</span>
+                    Votre aide à domicile en un  <span>clic</span>
                   </h1>
-                  <p>Search From 150 Awesome Verified Ads!</p>
+                  <p>Ménage, garde d’enfants, aide aux seniors, bricolage…</p>
                   <div className="search-box-two">
                     <form action={routes.search}>
                       <div className="search-input-new line">
@@ -121,7 +153,7 @@ const HomeTwo = () => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="What are you looking for?"
+                            placeholder="Que recherchez-vous ?"
                           />
                         </div>
                       </div>
@@ -131,7 +163,7 @@ const HomeTwo = () => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Your Location"
+                            placeholder="Votre emplacement"
                           />
                           <Link
                             className="current-loc-icon current_location"
@@ -144,7 +176,7 @@ const HomeTwo = () => {
                       <div className="search-btn">
                         <button className="btn search_service" type="submit">
                           <Icon.Search className="feather icon-search me-2" />
-                          Search
+                          Recherche
                         </button>
                       </div>
                     </form>
@@ -154,14 +186,295 @@ const HomeTwo = () => {
             </div>
           </div>
         </section>
+   <section className="feature-section service-section-two">
+        <div className="container">
+          <div className="section-heading">
+            <div className="row align-items-center">
+              <div className="col-md-6 aos" data-aos="fade-up">
+                <h2>Sélection De Catégories</h2>
+                  <p>De quoi avez-vous besoin ?</p>
+              </div>
+              <div className="col-md-6 text-md-end aos" data-aos="fade-up">
+                <Link
+                  to={routes.categories}
+                  className="btn btn-primary btn-view"
+                >
+                  Voir Tout
+                  <Icon.ArrowRightCircle className="standard-feather ms-2" />
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-6 col-lg-3">
+              <Link
+                to={routes.serviceDetails1}
+                className="feature-box aos"
+                data-aos="fade-up"
+              >
+                <div className="feature-icon">
+                  <span>
+                    <ImageWithBasePath
+                      src="assets/img/icons/feature-icon-01.svg"
+                      alt="img"
+                    />
+                  </span>
+                </div>
+                <h5>Construction</h5>
+                <div className="feature-overlay">
+                  <ImageWithBasePath
+                    src="assets/img/services/service-02.jpg"
+                    alt="img"
+                  />
+                </div>
+              </Link>
+            </div>
+            <div className="col-md-6 col-lg-3">
+              <Link
+                to={routes.serviceDetails1}
+                className="feature-box aos"
+                data-aos="fade-up"
+              >
+                <div className="feature-icon">
+                  <span>
+                    <ImageWithBasePath
+                      src="assets/img/icons/feature-icon-02.svg"
+                      alt="img"
+                    />
+                  </span>
+                </div>
+                <h5>Car Wash</h5>
+                <div className="feature-overlay">
+                  <ImageWithBasePath src="assets/img/feature.jpg" alt="img" />
+                </div>
+              </Link>
+            </div>
+            <div className="col-md-6 col-lg-3">
+              <Link
+                to={routes.serviceDetails1}
+                className="feature-box aos"
+                data-aos="fade-up"
+              >
+                <div className="feature-icon">
+                  <span>
+                    <ImageWithBasePath
+                      src="assets/img/icons/feature-icon-03.svg"
+                      alt="img"
+                    />
+                  </span>
+                </div>
+                <h5>Electrical</h5>
+                <div className="feature-overlay">
+                  <ImageWithBasePath
+                    src="assets/img/services/service-01.jpg"
+                    alt="img"
+                  />
+                </div>
+              </Link>
+            </div>
+            <div className="col-md-6 col-lg-3">
+              <Link
+                to={routes.serviceDetails1}
+                className="feature-box aos"
+                data-aos="fade-up"
+              >
+                <div className="feature-icon">
+                  <span>
+                    <ImageWithBasePath
+                      src="assets/img/icons/feature-icon-04.svg"
+                      alt="img"
+                    />
+                  </span>
+                </div>
+                <h5>Cleaning</h5>
+                <div className="feature-overlay">
+                  <ImageWithBasePath
+                    src="assets/img/services/service-09.jpg"
+                    alt="img"
+                  />
+                </div>
+              </Link>
+            </div>
+            <div className="col-md-6 col-lg-3">
+              <Link
+                to={routes.serviceDetails1}
+                className="feature-box aos"
+                data-aos="fade-up"
+              >
+                <div className="feature-icon">
+                  <span>
+                    <ImageWithBasePath
+                      src="assets/img/icons/feature-icon-05.svg"
+                      alt="img"
+                    />
+                  </span>
+                </div>
+                <h5>Interior</h5>
+                <div className="feature-overlay">
+                  <ImageWithBasePath
+                    src="assets/img/services/service-07.jpg"
+                    alt="img"
+                  />
+                </div>
+              </Link>
+            </div>
+            <div className="col-md-6 col-lg-3">
+              <Link
+                to={routes.serviceDetails1}
+                className="feature-box aos"
+                data-aos="fade-up"
+              >
+                <div className="feature-icon">
+                  <span>
+                    <ImageWithBasePath
+                      src="assets/img/icons/feature-icon-06.svg"
+                      alt="img"
+                    />
+                  </span>
+                </div>
+                <h5>Carpentry</h5>
+                <div className="feature-overlay">
+                  <ImageWithBasePath
+                    src="assets/img/services/service-03.jpg"
+                    alt="img"
+                  />
+                </div>
+              </Link>
+            </div>
+            <div className="col-md-6 col-lg-3">
+              <Link
+                to={routes.serviceDetails1}
+                className="feature-box aos"
+                data-aos="fade-up"
+              >
+                <div className="feature-icon">
+                  <span>
+                    <ImageWithBasePath
+                      src="assets/img/icons/feature-icon-07.svg"
+                      alt="img"
+                    />
+                  </span>
+                </div>
+                <h5>Computer</h5>
+                <div className="feature-overlay">
+                  <ImageWithBasePath
+                    src="assets/img/services/service-06.jpg"
+                    alt="img"
+                  />
+                </div>
+              </Link>
+            </div>
+            <div className="col-md-6 col-lg-3">
+              <Link
+                to={routes.serviceDetails1}
+                className="feature-box aos"
+                data-aos="fade-up"
+              >
+                <div className="feature-icon">
+                  <span>
+                    <ImageWithBasePath
+                      src="assets/img/icons/feature-icon-08.svg"
+                      alt="img"
+                    />
+                  </span>
+                </div>
+                <h5>Plumbing</h5>
+                <div className="feature-overlay">
+                  <ImageWithBasePath
+                    src="assets/img/services/service-11.jpg"
+                    alt="img"
+                  />
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <section className="feature-section-two">
+        {/* Avantages */}
+        <section id="avantages" className="work-section-two py-5">
+          <div className="section-heading-two text-center ">
+            <h2 >
+              Trouvez L’aide À Domicile Qui Vous Ressemble
+            </h2>
+            <div className="h4 text-uppercase mb-4">
+              POUR VOUS, POUR UN PROCHE, POUR AUJOURD’HUI… ET POUR DEMAIN.
+            </div>
+            <p>
+            
+              Avec WAP, accédez à un accompagnement personnalisé, choisissez un
+              intervenant de confiance, gardez la même personne dans la durée, et
+              simplifiez toutes vos démarches administratives.
+              <br />
+              Notre mission ?<br />
+              👉 Vous offrir une aide adaptée, bienveillante et sécurisée, pour un
+              quotidien plus serein à domicile.
+            </p>
+            <div
+              className="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4 position-relative"
+              style={{ zIndex: 10 }}
+            >
+              {/* Première image */}
+              <div
+                className="shadow rounded overflow-hidden"
+                style={{
+                  width: "18rem",
+                  height: "18rem",
+                  backgroundColor: "rgba(229,229,229,0.5)",
+                  transition: "box-shadow 0.3s",
+                }}
+              >
+                <img
+                  src="ICON1.png"
+                  alt=""
+                  className="w-100 h-100"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+
+              {/* Cercles superposés */}
+              <div
+                className="d-flex align-items-center position-relative"
+                style={{ marginLeft: "-2rem" }}
+              >
+                <div
+                  className="bg-secondary rounded-circle"
+                  style={{ width: "4rem", height: "4rem", opacity: 0.2 }}
+                ></div>
+                <div
+                  className="bg-primary rounded-circle position-absolute"
+                  style={{ width: "4rem", height: "4rem", left: "2.5rem", opacity: 0.6 }}
+                ></div>
+              </div>
+
+              {/* Deuxième image */}
+              <div
+                className="shadow rounded overflow-hidden"
+                style={{
+                  width: "18rem",
+                  height: "18rem",
+                  backgroundColor: "rgba(229,229,229,0.5)",
+                  transition: "box-shadow 0.3s",
+                }}
+              >
+                <img
+                  src="ICON2.png"
+                  alt=""
+                  className="w-100 h-100"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* <section className="feature-section-two">
           <div className="container">
             <div className="row">
               <div className="col-md-6 aos" data-aos="fade-up">
                 <div className="section-heading-two">
-                  <h2>Featured Categories</h2>
-                  <p>What do you need to find?</p>
+                  <h2>Sélection De Catégories</h2>
+                  <p>De quoi avez-vous besoin ?</p>
                 </div>
               </div>
               <div className="col-md-6 text-md-end aos" data-aos="fade-up">
@@ -169,7 +482,7 @@ const HomeTwo = () => {
                   to={routes.categories}
                   className="btn btn-primary btn-view rounded-pill"
                 >
-                  View All
+                  Voir tout
                 </Link>
               </div>
             </div>
@@ -326,16 +639,19 @@ const HomeTwo = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
+              {/* Feature Section */}
+   
+      {/* /Feature Section */}
 
         <section className="service-section-two">
           <div className="container">
             <div className="row align-items-center">
               <div className="col-md-6 aos" data-aos="fade-up">
                 <div className="section-heading-two">
-                  <h2>Featured Services</h2>
+                  <h2>Sélection De Services</h2>
                   <p>
-                    Explore the greates our services. You won’t be disappointed
+                    Découvrez le meilleur de nos services. Vous ne serez pas déçu.
                   </p>
                 </div>
               </div>
@@ -356,7 +672,7 @@ const HomeTwo = () => {
                     </Link>
                     <div className="fav-item">
                       <Link to={routes.categories}>
-                        <span className="item-cat">Cleaning</span>
+                        <span className="item-cat">Nettoyage</span>
                       </Link>
                       <Link to="#" 
                        onClick={() => handleItemClick(1)}
@@ -381,7 +697,7 @@ const HomeTwo = () => {
                   </div>
                   <div className="service-content">
                     <h3 className="title">
-                      <Link to={routes.serviceDetails1}>Toughened Glass Fitting Services</Link>
+                      <Link to={routes.serviceDetails1}>Services d&apos;installation de verre trempé</Link>
                     </h3>
                     <p>
                       <i className="feather icon-map-pin me-2" />
@@ -443,7 +759,7 @@ const HomeTwo = () => {
                   </div>
                   <div className="service-content">
                     <h3 className="title">
-                      <Link to={routes.serviceDetails1}>Car Repair Services</Link>
+                      <Link to={routes.serviceDetails1}>Services de réparation automobile</Link>
                     </h3>
                     <p>
                       <i className="feather icon-map-pin me-2" />
@@ -479,7 +795,7 @@ const HomeTwo = () => {
                     </Link>
                     <div className="fav-item">
                       <Link to={routes.categories}>
-                        <span className="item-cat">Carpentry</span>
+                        <span className="item-cat">Menuiserie</span>
                       </Link>
                       <Link to="#" onClick={() => handleItemClick(3)}
                       className={`fav-icon ${
@@ -503,7 +819,7 @@ const HomeTwo = () => {
                   </div>
                   <div className="service-content">
                     <h3 className="title">
-                      <Link to={routes.serviceDetails1}>Electric Panel Repairing Service</Link>
+                      <Link to={routes.serviceDetails1}>Service de réparation de panneau électrique</Link>
                     </h3>
                     <p>
                       <i className="feather icon-map-pin me-2" />
@@ -541,8 +857,8 @@ const HomeTwo = () => {
                   className="section-heading sec-header aos"
                   data-aos="fade-up"
                 >
-                  <h2>How It Works</h2>
-                  <p>Straightforward process designed to make your experience seamless and hassle-free.</p>
+                  <h2>Comment Ça Marche</h2>
+                  <p>Un processus simple conçu pour rendre votre expérience fluide et sans tracas.</p>
                 </div>
               </div>
             </div>
@@ -560,8 +876,8 @@ const HomeTwo = () => {
                       />
                     </span>
                   </div>
-                  <h5>Search and Browse</h5>
-                  <p>Customers can browse or search for specific products or services using categories, filters, or search bars.
+                  <h5>Cherchez un service</h5>
+                  <p>Indiquez votre besoin (ménage, aide à domicile, etc.) et votre localisation avec facilité.
                   </p>
                 </div>
               </div>
@@ -575,9 +891,9 @@ const HomeTwo = () => {
                       />
                     </span>
                   </div>
-                  <h5>Find What You Want</h5>
+                  <h5>Choisissez votre pro</h5>
                   <p>
-                  Customers can add items to their cart. For services, they may select a service and proceed to book.
+                    Parcourez les profils, consultez les avis et vérifiez les disponibilités en un clin d’œil.
                   </p>
                 </div>
               </div>
@@ -592,9 +908,9 @@ const HomeTwo = () => {
                         />
                       </span>
                     </div>
-                    <h5>Order Fulfillment</h5>
+                    <h5>Réservez en ligne</h5>
                     <p>
-                      The Customer fulfills the order by either providing the service to the customer & Get Leads from locals
+                      Planifiez, discutez et suivez tout depuis votre espace personnel en toute simplicité.
                     </p>
                   </div>
                 </div>
@@ -603,7 +919,7 @@ const HomeTwo = () => {
           </div>
         </section>
 
-        <section className="service-section upnav">
+        {/* <section className="service-section upnav">
           <div className="container">
             <div className="row">
               <div className="col-md-6 aos" data-aos="fade-up">
@@ -890,9 +1206,9 @@ const HomeTwo = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
-        <section className="providers-section-two">
+        {/* <section className="providers-section-two">
           <div className="container">
             <div className="row">
               <div className="col-md-6 aos" data-aos="fade-up">
@@ -1086,7 +1402,7 @@ const HomeTwo = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="price-sections">
           <div className="container">
@@ -1098,7 +1414,7 @@ const HomeTwo = () => {
                 </div>
               </div>
             </div>
-            <div className="price-toggle mb-0 text-center">
+            {/* <div className="price-toggle mb-0 text-center">
               <div className="status-toggle toggle-pink d-inline-flex align-items-center">
                 Bill Monthly
                 <input type="checkbox" id="status_1" className="check" />
@@ -1107,13 +1423,13 @@ const HomeTwo = () => {
                 </label>
                 Bill Annualy
               </div>
-            </div>
+            </div> */}
             <div className="row aos" data-aos="fade-up">
               <div className="col-lg-4 col-sm-12">
                 <div className="pricing-plans price-new">
                   <div className="pricing-planshead">
                     <h6>
-                      $19<span>/month</span>
+                      x<span>/month</span>
                     </h6>
                     <h4>Starter</h4>
                     <h5>Basic service description and up to 3 images</h5>
@@ -1152,7 +1468,7 @@ const HomeTwo = () => {
                       <span className="popular">MOST POPULAR</span>
                     </div>
                     <h6>
-                      $89<span>/month</span>
+                      x<span>/month</span>
                     </h6>
                     <h4>Company</h4>
                     <h5>Enhanced service description with video support</h5>
@@ -1192,7 +1508,7 @@ const HomeTwo = () => {
                 <div className="pricing-plans price-new">
                   <div className="pricing-planshead">
                     <h6>
-                      $150<span>/month</span>
+                      x<span>/month</span>
                     </h6>
                     <h4>Professional</h4>
                     <h5>Advanced service with multiple media types</h5>
@@ -1229,7 +1545,7 @@ const HomeTwo = () => {
         </section>
 
 
-        <section className="app-section-two">
+        {/* <section className="app-section-two">
           <div className="container">
             <div className="row align-items-center">
               <div className="col-md-6 col-12">
@@ -1278,17 +1594,16 @@ const HomeTwo = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
-        <section className="client-section-two">
+        {/* <section className="client-section-two">
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center">
                 <div className="section-heading sec-header aos" data-aos="fade-up">
-                  <h2>Testimonials</h2>
+                  <h2>Ils Parlent De Nous</h2>
                   <p>
-                    Description highlights the value of client feedback, showcases real
-                    testimonials
+                    Découvrez les témoignages authentiques de nos clients satisfaits 
                   </p>
                 </div>
               </div>
@@ -1306,10 +1621,7 @@ const HomeTwo = () => {
                     </div>
                     <h6>“The best service”</h6>
                     <p>
-                      Versatile and user-friendly platform for freelancers and
-                      businesses alike. Its interface is clean and intuitive, making it
-                      easy to post jobs, browse profiles, and manage projects. The range
-                      of services is impressive,
+                     “WAP m’a permis de trouver une aide pour mon père en quelques jours, sans stress ni complications.”
                     </p>
                   </div>
                   <div className="client-img">
@@ -1394,10 +1706,191 @@ const HomeTwo = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
+          <section className="client-section">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 text-center">
+              <div className="section-heading aos" data-aos="fade-up">
+                <h2>Ils Parlent De Nous</h2>
+                <p>Découvrez les témoignages authentiques de nos clients satisfaits </p>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <Slider {...clientSlider} className='testimonial-slider'>
+              <div className="client-widget card aos" data-aos="fade-up">
+                <div className="card-body">
+                  <div className="client-img">
+                    <Link to="#">
+                      <ImageWithBasePath
+                        className="img-fluid"
+                        alt="Image"
+                        src="assets/img/profiles/avatar-01.jpg"
+                      />
+                    </Link>
+                  </div>
+                  <div className="client-content">
+                    <div className="rating">
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                    </div>
+                    <p>
+                     “WAP m’a permis de trouver une aide pour mon père en quelques jours, sans stress ni complications.”
+                    </p>
+                    <h5>Sabrina</h5>
+                    <h6>aidante familiale</h6>
+                  </div>
+                </div>
+              </div>
+              <div className="client-widget card aos" data-aos="fade-up">
+                <div className="card-body">
+                  <div className="client-img">
+                    <Link to="#">
+                      <ImageWithBasePath
+                        className="img-fluid"
+                        alt="Image"
+                        src="assets/img/profiles/avatar-02.jpg"
+                      />
+                    </Link>
+                  </div>
+                  <div className="client-content">
+                    <div className="rating">
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                    </div>
+                    <p>
+                      “Grâce à WAP, je travaille à mon rythme avec des familles proches de chez moi.”
+                    </p>
+                    <h5>Kevin</h5>
+                    <h6>intervenant à domicile</h6>
+                  </div>
+                </div>
+              </div>
+              <div className="client-widget card aos" data-aos="fade-up">
+                <div className="card-body">
+                  <div className="client-img">
+                    <Link to="#">
+                      <ImageWithBasePath
+                        className="img-fluid"
+                        alt="Image"
+                        src="assets/img/profiles/avatar-03.jpg"
+                      />
+                    </Link>
+                  </div>
+                  <div className="client-content">
+                    <div className="rating">
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                    </div>
+                    <p>
+                      “L’accompagnement personnalisé de WAP a transformé la vie de ma mère, un vrai soulagement !”
+                    </p>
+                    <h5>Sophie</h5>
+                    <h6>fille d’un senior</h6>
+                  </div>
+                </div>
+              </div>
+              <div className="client-widget card aos" data-aos="fade-up">
+                <div className="card-body">
+                  <div className="client-img">
+                    <Link to="#">
+                      <ImageWithBasePath
+                        className="img-fluid"
+                        alt="Image"
+                        src="assets/img/profiles/avatar-03.jpg"
+                      />
+                    </Link>
+                  </div>
+                  <div className="client-content">
+                    <div className="rating">
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                    </div>
+                    <p>
+                     “Trouver une aide fiable était facile avec WAP, et le service est impeccable.”
+                    </p>
+                    <h5>Julien</h5>
+                    <h6>père de famille</h6>
+                  </div>
+                </div>
+              </div>
+              <div className="client-widget card aos" data-aos="fade-up">
+                <div className="card-body">
+                  <div className="client-img">
+                    <Link to="#">
+                      <ImageWithBasePath
+                        className="img-fluid"
+                        alt="Image"
+                        src="assets/img/profiles/avatar-03.jpg"
+                      />
+                    </Link>
+                  </div>
+                  <div className="client-content">
+                    <div className="rating">
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                    </div>
+                    <p>
+                     “WAP m’a sauvé la vie avec un soutien rapide et professionnel pour mes parents âgés.”
+                    </p>
+                    <h5>Claire</h5>
+                    <h6>aidante familiale</h6>
+                  </div>
+                </div>
+              </div>
+               <div className="client-widget card aos" data-aos="fade-up">
+                <div className="card-body">
+                  <div className="client-img">
+                    <Link to="#">
+                      <ImageWithBasePath
+                        className="img-fluid"
+                        alt="Image"
+                        src="assets/img/profiles/avatar-03.jpg"
+                      />
+                    </Link>
+                  </div>
+                  <div className="client-content">
+                    <div className="rating">
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                      <i className="fas fa-star filled" />
+                    </div>
+                    <p>
+                     “Une expérience fluide et humaine, je recommande WAP à tous les parents occupés !”
+                    </p>
+                    <h5>Thomas</h5>
+                    <h6>père actif</h6>
+                  </div>
+                </div>
+              </div>
+              </Slider>
+            </div>
+          </div>
+        </div>
+      </section>
+        
 
 
-        <section className="blog-section blog-section-two">
+        {/* <section className="blog-section blog-section-two">
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center aos" data-aos="fade-up">
@@ -1541,10 +2034,10 @@ const HomeTwo = () => {
               </Link>
             </div>
           </div>
-        </section>
+        </section> */}
 
 
-        <section className="blog-section pt-0">
+        {/* <section className="blog-section pt-0">
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center aos " data-aos="fade-up">
@@ -1593,7 +2086,7 @@ const HomeTwo = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="section-offer">
           <div className="container">
@@ -1602,18 +2095,16 @@ const HomeTwo = () => {
                 <div className="offer-paths offer-sec">
                   <div className="offer-path-content">
                     <div className="section-heading-two">
-                      <p>14 Days Free Trial</p>
+                      <p>Une Communauté Qui Vous Ressemble</p>
                       <h3 className="mb-0">
-                        We Are Offering 14 Days Free Trial
+                        REJOIGNEZ UNE COMMUNAUTÉ...
                       </h3>
                     </div>
                     <p>
-                    Whether you&apos;re looking to our app brings everything you need right
-									to your fingertips. Enjoy a smooth and intuitive experience designed
-									with you in mind.
+                      Des milliers de familles et professionnels...
                     </p>
                     <Link to={routes.freeTrail} className="btn btn-dark rounded-pill">
-                      Try 14 Days Free Trial
+                      Créer mon compte gratuitement
                       <i className="feather icon-arrow-right-circle ms-2" />
                     </Link>
                   </div>
