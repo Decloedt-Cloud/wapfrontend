@@ -128,7 +128,7 @@ const Footer = () => {
 						</div>
 						<div className="col-lg-3 col-md-6">
 							{/* <!-- Footer Widget --> */}
-							<div className="footer-widget">
+							{/* <div className="footer-widget">
 								<h2 className="footer-title">Instagram Feed</h2>
 								<ul className="row insta-row">
 									<li className="col-3 col-md-4">
@@ -177,7 +177,7 @@ const Footer = () => {
 										</a>
 									</li>
 								</ul>
-							</div>
+							</div> */}
 							{/* <!-- /Footer Widget --> */}
 						</div>
 					</div>
