@@ -16,7 +16,7 @@ const Header = () => {
 							</span>
 						</a>
 						<a href="/" className="navbar-brand logo">
-							<img src="logo_wap.png" className="img-fluid" alt="Logo"/>
+							<img src="logo_wap.png" className="img-fluid" alt="Logo" />
 						</a>
 						<a href="index.html" className="navbar-brand logo-small">
 							<img src="assets/img/logo-icon.png" className="img-fluid" alt="Logo"/>
