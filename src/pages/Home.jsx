@@ -56,13 +56,13 @@ const Home = () => {
 		<section className="hero-section-two py-0">			
 			<div className="banner-slider slider">
 				<div className="banner">
-					<img className="img-fluid" src="assets/img/banner.jpg" alt="img"/>
+					<img className="img-fluid" src="banner.jpg" alt="img"/>
 				</div>
 				<div className="banner">
-					<img className="img-fluid" src="assets/img/banner-02.jpg" alt="img"/>
+					<img className="img-fluid" src="banner-02.jpg" alt="img"/>
 				</div>
 				<div className="banner">
-					<img className="img-fluid" src="assets/img/banner-03.jpg" alt="img"/>
+					<img className="img-fluid" src="banner-03.jpg" alt="img"/>
 				</div>
 			</div>	
 			<div className="banner-search aos" data-aos="fade-up">
@@ -99,11 +99,60 @@ const Home = () => {
 		</section>
 		{/* <!-- /Hero Section --> */}
 {/* 	
+		
+		{/* <!-- Feature Section --> */} 
+		<section className="feature-section relative">
+      {/* Decorative Background Images */}
+      <div className="circle-lg d-none d-md-block absolute top-0 left-0">
+        <img src="assets/img/bg/circle-lg.png" className="img-fluid" alt="bg" />
+      </div>
+      <div className="corner-dot absolute bottom-0 right-0">
+        <img src="assets/img/bg/corner-dot.png" className="img-fluid" alt="bg" />
+      </div>
+
+      <div className="container">
+        <div className="section-heading">
+          <div className="row align-items-center">
+            <div className="col-md-6" data-aos="fade-up">
+              <h2>Catégories</h2>
+              <p>
+                Notre plateforme est conçue avec une gamme de fonctionnalités innovantes répondant à vos besoins spécifiques.
+              </p>
+            </div>
+            <div className="col-md-6 text-md-end" data-aos="fade-up">
+              <Link to="/categories" className="btn btn-primary">
+                 Voir tout <i className="ti ti-arrow-right ms-1"></i>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          {features.map((item, index) => (
+            <div key={index} className="col-md-6 col-lg-3">
+              <Link to="/service-details" className="feature-box d-block" data-aos="fade-up">
+                <div className="feature-icon">
+                  <span>
+                    <img src={item.icon} alt={item.title} />
+                  </span>
+                </div>
+                <h5>{item.title}</h5>
+                <div className="feature-overlay">
+                  <img src={item.image} alt={item.title} />
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    	</section>
+		{/* <!-- /Feature Section --> */}
+
 		  {/* Avantages */}
         <section id="avantages" className="work-section-two py-5">
           <div className="section-heading-two text-center ">
             <h2 >
-              Trouvez L’aide À Domicile Qui Vous Ressemble
+              Trouvez l’aide à domicile qui vous ressemble
             </h2>
             <div className="h4 text-uppercase mb-4">
               POUR VOUS, POUR UN PROCHE, POUR AUJOURD’HUI… ET POUR DEMAIN.
@@ -175,53 +224,6 @@ const Home = () => {
             </div>
           </div>
         </section>	
-		{/* <!-- Feature Section --> */} 
-		<section className="feature-section relative">
-      {/* Decorative Background Images */}
-      <div className="circle-lg d-none d-md-block absolute top-0 left-0">
-        <img src="assets/img/bg/circle-lg.png" className="img-fluid" alt="bg" />
-      </div>
-      <div className="corner-dot absolute bottom-0 right-0">
-        <img src="assets/img/bg/corner-dot.png" className="img-fluid" alt="bg" />
-      </div>
-
-      <div className="container">
-        <div className="section-heading">
-          <div className="row align-items-center">
-            <div className="col-md-6" data-aos="fade-up">
-              <h2>Featured Categories</h2>
-              <p>
-                Our platform is designed with a range of innovative features that cater to your specific needs
-              </p>
-            </div>
-            <div className="col-md-6 text-md-end" data-aos="fade-up">
-              <Link to="/categories" className="btn btn-primary">
-                View All <i className="ti ti-arrow-right ms-1"></i>
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <div className="row">
-          {features.map((item, index) => (
-            <div key={index} className="col-md-6 col-lg-3">
-              <Link to="/service-details" className="feature-box d-block" data-aos="fade-up">
-                <div className="feature-icon">
-                  <span>
-                    <img src={item.icon} alt={item.title} />
-                  </span>
-                </div>
-                <h5>{item.title}</h5>
-                <div className="feature-overlay">
-                  <img src={item.image} alt={item.title} />
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
-    	</section>
-		{/* <!-- /Feature Section --> */}
 		
 		{/* <!-- Service Section --> */}
 		<section className="service-section-two">			
@@ -229,8 +231,9 @@ const Home = () => {
 				<div className="row align-items-center">
 					<div className="col-md-6 aos" data-aos="fade-up">
 						<div className="section-heading-two">						
-							<h2>Featured Services</h2>
-							<p>Explore the greates our services. You won’t be disappointed</p>
+							<h2>Services</h2>
+							<p>Découvrez le meilleur de nos services. Vous ne serez pas déçu.
+							</p>
 						</div>
 					</div>
 					<div className="col-md-6 text-md-end aos" data-aos="fade-up">
@@ -354,8 +357,8 @@ const Home = () => {
 				<div className="row">
 					<div className="col-md-12 text-center">
 						<div className="section-heading sec-header aos" data-aos="fade-up">
-							<h2>How It Works</h2>
-							<p>Straightforward process designed to make your experience seamless and hassle-free.</p>
+							<h2>Comment ça marche</h2>
+                  			<p>Un processus simple conçu pour rendre votre expérience fluide et sans tracas.</p>
 						</div>
 					</div>
 				</div>
@@ -367,8 +370,9 @@ const Home = () => {
 									<img src="assets/img/icons/work-icon-01.svg" alt="img"/>
 								</span>
 							</div>
-							<h5>Search and Browse</h5>
-							<p>Customers can browse or search for specific products or services using categories, filters, or search bars.</p>
+							       <h5>Cherchez un service</h5>
+									<p>Indiquez votre besoin (ménage, aide à domicile, etc.) et votre localisation avec facilité.
+									</p>
 						</div>						
 					</div>
 					<div className="col-lg-4 col-md-6">
@@ -378,8 +382,10 @@ const Home = () => {
 									<img src="assets/img/icons/work-icon-02.svg" alt="img"/>
 								</span>
 							</div>
-							<h5>Find What You Want</h5>
-							<p>Customers  can add items to their  cart. For services, they may select a service and proceed to book.</p>
+							<h5>Choisissez votre pro</h5>
+							<p>
+								Parcourez les profils, consultez les avis et vérifiez les disponibilités en un clin d’œil.
+							</p>
 						</div>						
 					</div>
 					<div className="col-lg-4 col-md-6">
@@ -390,8 +396,10 @@ const Home = () => {
 										<img src="assets/img/icons/work-icon-03.svg" alt="img"/>
 									</span>
 								</div>
-								<h5>Order Fulfillment</h5>
-								<p>The Customer fulfills the order by either providing the service  to the customer & Get Leads from locals </p>
+								<h5>Réservez en ligne</h5>
+								<p>
+								Planifiez, discutez et suivez tout depuis votre espace personnel en toute simplicité.
+								</p>
 							</div>						
 						</div>						
 					</div>
@@ -688,8 +696,8 @@ const Home = () => {
 				<div className="row">
 					<div className="col-md-12 text-center aos" data-aos="fade-up">
 						<div className="section-heading sec-header">
-							<h2>Pricing Plans</h2>
-							<p>New service providers can test the platform.   </p>
+							<h2>Forfaits tarifaires</h2>
+							<p>Les nouveaux prestataires de services peuvent tester la plateforme. </p>
 						</div>
 					</div>
 				</div>
@@ -697,7 +705,7 @@ const Home = () => {
 					<div className="col-lg-4 col-sm-12">
 						<div className="pricing-plans price-new">
 							<div className="pricing-planshead">
-								<h6>$19<span>/month</span></h6>
+								<h6>x<span>/month</span></h6>
 								<h4>Starter</h4>
 								<h5>Basic service description and up to 3 images</h5>
 							</div>
@@ -732,7 +740,7 @@ const Home = () => {
 								<div className="price-block">
 									<span className="popular">MOST POPULAR</span>
 								</div>
-								<h6>$89<span>/month</span></h6>
+								<h6>x<span>/month</span></h6>
 								<h4>Company</h4>
 								<h5>Enhanced service description with video support</h5>
 							</div>
@@ -768,7 +776,7 @@ const Home = () => {
 					<div className="col-lg-4 col-sm-12">
 						<div className="pricing-plans price-new">
 							<div className="pricing-planshead">
-								<h6>$150<span>/month</span></h6>
+								<h6>x<span>/month</span></h6>
 								<h4>Professional</h4>
 								<h5>Advanced service with multiple media types</h5>
 							</div>
@@ -840,7 +848,7 @@ const Home = () => {
 		{/* <!-- /App Section --> */}
 		
 		{/* <!-- Client Section --> */}
-		{/* <section className="client-section-two">			
+		<section className="client-section-two">			
 			<div className="container">
 				<div className="row">
 					<div className="col-md-12 text-center">
@@ -936,11 +944,11 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-		</section> */}
+		</section>
 		{/* <!-- /Client Section --> */}
 		
 		{/* <!-- Blog Section --> */}
-		<section className="blog-section blog-section-two">			
+		{/* <section className="blog-section blog-section-two">			
 			<div className="container">
 				<div className="row">
 					<div className="col-md-12 text-center aos" data-aos="fade-up">
@@ -1028,7 +1036,7 @@ const Home = () => {
 					<a href="blogs.html" className="btn btn-primary rounded-pill">View All Blogs</a>
 				</div>
 			</div>
-		</section>
+		</section> */}
 		{/* <!-- /Blog Section --> */}
 
 		{/* <!-- Partners Section --> */}
@@ -1074,13 +1082,15 @@ const Home = () => {
 						<div className="offer-paths offer-sec">
 							<div className="offer-path-content">
 								<div className="section-heading-two">
-									<p>14 Days Free Trial</p>
-									<h3 className="mb-0">We Are Offering 14 Days Free Trial</h3>
+									 <p>Une Communauté Qui Vous Ressemble</p>
+									<h3 className="mb-0">
+										REJOIGNEZ UNE COMMUNAUTÉ...
+									</h3>
 								</div>
-								<p>Whether you're looking to our app brings everything you need right
-									to your fingertips. Enjoy a smooth and intuitive experience designed
-									with you in mind.</p>
-								<a href="free-trail.html" className="btn btn-dark rounded-pill">Try 14 Days Free Trial<i className="feather-arrow-right-circle ms-2"></i></a>
+								<p>
+									Des milliers de familles et professionnels...
+								</p>
+								<a href="free-trail.html" className="btn btn-dark rounded-pill">Créer mon compte gratuitement<i className="feather-arrow-right-circle ms-2"></i></a>
 							</div>
 							<div className="offer-pathimg">
 								<img src="assets/img/offer-img.png" alt="img"/>
