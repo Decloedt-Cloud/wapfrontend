@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Eye, EyeOff, User, Building, Briefcase, MapPin, Mail, Phone, Lock, Check } from 'lucide-react';
+import { Eye, EyeOff, User, MapPin, Mail, Phone, Lock, Check } from 'lucide-react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterClient = () => {
   const [formData, setFormData] = useState({
@@ -8,17 +10,13 @@ const RegisterClient = () => {
     nom: '',
     prenom: '',
     nationalite: '',
-    companyType: '',
-    companyName: '',
-    activity: '',
-    city: '',
-    address: '',
+    adresse: '',
     indicatif: '',
-    phone: '',
+    telephone: '',
     email: '',
     password: '',
     confirmPassword: '',
-    acceptTerms: false,
+    conditions: false,
   });
 
   const [errors, setErrors] = useState({});
@@ -29,16 +27,7 @@ const RegisterClient = () => {
   const [addressSuggestions, setAddressSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const autocompleteRef = useRef(null);
-
-  const companyTypes = [
-    'Sélectionner le type d\'entreprise',
-    'Auto-Entrepreneur',
-    'Freelancer',
-    'Entreprise',
-    'SARL',
-    'SAS',
-    'Autre',
-  ];
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (window.google) {
@@ -71,103 +60,54 @@ const RegisterClient = () => {
 
     switch (name) {
       case 'name':
-        if (!value.trim()) {
-          error = 'Le nom complet est requis';
-        } else if (value.trim().length < 2) {
-          error = 'Le nom doit contenir au moins 2 caractères';
-        }
+        if (!value.trim()) error = 'Le nom complet est requis';
+        else if (value.trim().length < 2) error = 'Le nom doit contenir au moins 2 caractères';
         break;
       case 'sexe':
-        if (!value) {
-          error = 'Veuillez sélectionner un sexe';
-        }
+        if (!value) error = 'Veuillez sélectionner un sexe';
         break;
       case 'nom':
-        if (!value.trim()) {
-          error = 'Le nom de famille est requis';
-        } else if (value.trim().length < 2) {
-          error = 'Le nom doit contenir au moins 2 caractères';
-        }
+        if (!value.trim()) error = 'Le nom de famille est requis';
+        else if (value.trim().length < 2) error = 'Le nom doit contenir au moins 2 caractères';
         break;
       case 'prenom':
-        if (!value.trim()) {
-          error = 'Le prénom est requis';
-        } else if (value.trim().length < 2) {
-          error = 'Le prénom doit contenir au moins 2 caractères';
-        }
+        if (value && value.trim().length < 2) error = 'Le prénom doit contenir au moins 2 caractères';
         break;
       case 'nationalite':
-        if (!value.trim()) {
-          error = 'La nationalité est requise';
-        }
+        const nationalityRegex = /^[A-Z]{2,3}$/;
+        if (!value.trim()) error = 'La nationalité est requise';
+        else if (!nationalityRegex.test(value)) error = 'La nationalité doit être un code de 2 ou 3 lettres (ex: MA)';
         break;
-      case 'companyType':
-        if (!value || value === 'Sélectionner le type d\'entreprise') {
-          error = 'Veuillez sélectionner un type d\'entreprise';
-        }
-        break;
-      case 'companyName':
-        if (!value.trim()) {
-          error = 'Le nom d\'entreprise est requis';
-        } else if (value.trim().length < 2) {
-          error = 'Le nom doit contenir au moins 2 caractères';
-        }
-        break;
-      case 'activity':
-        if (!value.trim()) {
-          error = 'L\'activité est requise';
-        }
-        break;
-      case 'city':
-        if (!value.trim()) {
-          error = 'La ville est requise';
-        }
-        break;
-      case 'address':
-        if (!value.trim()) {
-          error = 'L\'adresse est requise';
-        }
+      case 'adresse':
+        if (!value.trim()) error = 'L\'adresse est requise';
         break;
       case 'indicatif':
-        if (!value.trim()) {
-          error = 'L\'indicatif téléphonique est requis';
-        }
+        if (value && value.trim().length > 10) error = 'L\'indicatif ne doit pas dépasser 10 caractères';
         break;
-      case 'phone':
+      case 'telephone':
         const phoneRegex = /^(\+212|\+31|\+33|0)[1-9]\d{8}$/;
-        if (!value.trim()) {
-          error = 'Le numéro de téléphone est requis';
-        } else if (!phoneRegex.test(value.replace(/[\s-]/g, ''))) {
+        if (value && !phoneRegex.test(`${formData.indicatif}${value}`.replace(/[\s.-]/g, ''))) {
           error = 'Format de téléphone invalide (ex: +212612345678, +33612345678)';
         }
         break;
       case 'email':
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!value.trim()) {
-          error = 'L\'adresse email est requise';
-        } else if (!emailRegex.test(value)) {
-          error = 'Format d\'email invalide';
-        }
+        if (!value.trim()) error = 'L\'adresse email est requise';
+        else if (!emailRegex.test(value)) error = 'Format d\'email invalide';
         break;
       case 'password':
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-        if (!value) {
-          error = 'Le mot de passe est requis';
-        } else if (!passwordRegex.test(value)) {
+        if (!value) error = 'Le mot de passe est requis';
+        else if (!passwordRegex.test(value)) {
           error = 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial (@$!%*?&)';
         }
         break;
       case 'confirmPassword':
-        if (!value) {
-          error = 'Veuillez confirmer le mot de passe';
-        } else if (value !== formData.password) {
-          error = 'Les mots de passe ne correspondent pas';
-        }
+        if (!value) error = 'Veuillez confirmer le mot de passe';
+        else if (value !== formData.password) error = 'Les mots de passe ne correspondent pas';
         break;
-      case 'acceptTerms':
-        if (!value) {
-          error = 'Vous devez accepter les conditions d\'utilisation';
-        }
+      case 'conditions':
+        if (!value) error = 'Vous devez accepter les conditions d\'utilisation';
         break;
       default:
         break;
@@ -185,7 +125,7 @@ const RegisterClient = () => {
       [name]: fieldValue,
     }));
 
-    if (name === 'address') {
+    if (name === 'adresse') {
       fetchAddressSuggestions(value);
     }
 
@@ -207,13 +147,13 @@ const RegisterClient = () => {
   const handleSuggestionSelect = (suggestion) => {
     setFormData((prev) => ({
       ...prev,
-      address: suggestion.description,
+      adresse: suggestion.description,
     }));
     setAddressSuggestions([]);
     setShowSuggestions(false);
     setErrors((prev) => ({
       ...prev,
-      address: '',
+      adresse: '',
     }));
   };
 
@@ -225,60 +165,74 @@ const RegisterClient = () => {
       const error = validateField(key, formData[key]);
       if (error) newErrors[key] = error;
     });
-
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
 
       try {
-        const response = await fetch('/api/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
+        const payload = {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          password_confirmation: formData.confirmPassword,
+          sexe: formData.sexe,
+          nom: formData.nom,
+          prenom: formData.prenom,
+          nationalite: formData.nationalite,
+          adresse: formData.adresse,
+          indicatif: formData.indicatif,
+          telephone: `${formData.indicatif}${formData.telephone}`,
+          conditions: formData.conditions,
+        };
 
-        if (response.ok) {
-          await fetch('/api/send-validation-email', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: formData.email }),
-          });
+        const response = await axios.post('http://localhost:8000/api/register-client', payload);
 
+        if (response.status === 201) {
+          // Store token in localStorage
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          
+          // Show success popup
           setShowSuccessPopup(true);
-          setTimeout(() => setShowSuccessPopup(false), 5000);
+          setTimeout(() => {
+            setShowSuccessPopup(false);
+            // Redirect to dashboard
+            navigate('/Confirmregisterpopup');
+          }, 2000);
 
+          // Reset form
           setFormData({
             name: '',
             sexe: '',
             nom: '',
             prenom: '',
             nationalite: '',
-            companyType: '',
-            companyName: '',
-            activity: '',
-            city: '',
-            address: '',
+            adresse: '',
             indicatif: '',
-            phone: '',
+            telephone: '',
             email: '',
             password: '',
             confirmPassword: '',
-            acceptTerms: false,
+            conditions: false,
           });
           setErrors({});
           setAddressSuggestions([]);
           setShowSuggestions(false);
         } else {
-          throw new Error('Erreur lors de l\'inscription');
+          alert('Erreur lors de l\'inscription. Veuillez réessayer.');
         }
       } catch (error) {
-        alert('Une erreur est survenue lors de l\'inscription. Veuillez réessayer.');
-        console.error('Erreur d\'inscription:', error);
+        console.error('Erreur inscription:', {
+          status: error.response?.status,
+          data: error.response?.data,
+          message: error.message,
+        });
+        if (error.response && error.response.data.errors) {
+          setErrors(error.response.data.errors);
+        } else {
+          alert('Erreur serveur: ' + (error.response?.data.message || 'Veuillez réessayer plus tard.'));
+        }
       } finally {
         setIsSubmitting(false);
       }
@@ -296,21 +250,19 @@ const RegisterClient = () => {
     error && (
       <p className="text-red-500 text-xs mt-1 flex items-center">
         <span className="w-4 h-4 mr-1">⚠</span>
-        {error}
+        {Array.isArray(error) ? error[0] : error}
       </p>
     )
   );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-12 px-4">
-   <div className="max-w-xl mx-auto px-4 sm:px-6">
-
-
+      <div className="max-w-xl mx-auto px-4 sm:px-6">
         <div className="bg-white rounded-2xl shadow-xl p-10 border border-gray-100">
           {showSuccessPopup && (
             <div className="fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg flex items-center">
               <Check className="w-5 h-5 mr-2" />
-              <span>Inscrit avec succès ! Un email de validation vous a été envoyé.</span>
+              <span>Inscrit avec succès ! Redirection vers le tableau de bord...</span>
               <button
                 onClick={() => setShowSuccessPopup(false)}
                 className="ml-4 text-white hover:text-gray-200"
@@ -386,7 +338,7 @@ const RegisterClient = () => {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <User className="w-4 h-4 inline mr-2" />
-                Prénom *
+                Prénom
               </label>
               <input
                 type="text"
@@ -395,7 +347,6 @@ const RegisterClient = () => {
                 onChange={handleInputChange}
                 placeholder="Entrez votre prénom"
                 className={inputClasses('prenom')}
-                required
               />
               <ErrorMessage error={errors.prenom} />
             </div>
@@ -417,78 +368,6 @@ const RegisterClient = () => {
               <ErrorMessage error={errors.nationalite} />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                <Building className="w-4 h-4 inline mr-2" />
-                Type d'entreprise *
-              </label>
-              <select
-                name="companyType"
-                value={formData.companyType}
-                onChange={handleInputChange}
-                className={inputClasses('companyType')}
-                required
-              >
-                {companyTypes.map((type, index) => (
-                  <option key={index} value={type} disabled={index === 0}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-              <ErrorMessage error={errors.companyType} />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                <Building className="w-4 h-4 inline mr-2" />
-                Nom ou Nom d'entreprise *
-              </label>
-              <input
-                type="text"
-                name="companyName"
-                value={formData.companyName}
-                onChange={handleInputChange}
-                placeholder="Entrez le nom de votre entreprise"
-                className={inputClasses('companyName')}
-                required
-              />
-              <ErrorMessage error={errors.companyName} />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                <Briefcase className="w-4 h-4 inline mr-2" />
-                Activité *
-              </label>
-              <input
-                type="text"
-                name="activity"
-                value={formData.activity}
-                onChange={handleInputChange}
-                placeholder="Décrivez votre activité"
-                className={inputClasses('activity')}
-                required
-              />
-              <ErrorMessage error={errors.activity} />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                <MapPin className="w-4 h-4 inline mr-2" />
-                Ville *
-              </label>
-              <input
-                type="text"
-                name="city"
-                value={formData.city}
-                onChange={handleInputChange}
-                placeholder="Votre ville"
-                className={inputClasses('city')}
-                required
-              />
-              <ErrorMessage error={errors.city} />
-            </div>
-
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <MapPin className="w-4 h-4 inline mr-2" />
@@ -496,12 +375,12 @@ const RegisterClient = () => {
               </label>
               <input
                 type="text"
-                name="address"
-                value={formData.address}
+                name="adresse"
+                value={formData.adresse}
                 onChange={handleInputChange}
-                onFocus={() => formData.address && fetchAddressSuggestions(formData.address)}
+                onFocus={() => formData.adresse && fetchAddressSuggestions(formData.adresse)}
                 placeholder="Votre adresse complète"
-                className={inputClasses('address')}
+                className={inputClasses('adresse')}
                 required
               />
               {showSuggestions && addressSuggestions.length > 0 && (
@@ -518,41 +397,39 @@ const RegisterClient = () => {
                   ))}
                 </ul>
               )}
-              <ErrorMessage error={errors.address} />
+              <ErrorMessage error={errors.adresse} />
             </div>
 
             <div className="flex space-x-2">
               <div className="w-1/4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   <Phone className="w-4 h-4 inline mr-2" />
-                  Indicatif *
+                  Indicatif
                 </label>
                 <input
                   type="text"
                   name="indicatif"
                   value={formData.indicatif}
                   onChange={handleInputChange}
-                  placeholder="+33"
+                  placeholder="+212"
                   className={inputClasses('indicatif')}
-                  required
                 />
                 <ErrorMessage error={errors.indicatif} />
               </div>
               <div className="w-3/4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   <Phone className="w-4 h-4 inline mr-2" />
-                  Téléphone *
+                  Téléphone
                 </label>
                 <input
                   type="tel"
-                  name="phone"
-                  value={formData.phone}
+                  name="telephone"
+                  value={formData.telephone}
                   onChange={handleInputChange}
                   placeholder="0612345678"
-                  className={inputClasses('phone')}
-                  required
+                  className={inputClasses('telephone')}
                 />
-                <ErrorMessage error={errors.phone} />
+                <ErrorMessage error={errors.telephone} />
               </div>
             </div>
 
@@ -635,22 +512,22 @@ const RegisterClient = () => {
                 <div className="relative">
                   <input
                     type="checkbox"
-                    name="acceptTerms"
-                    checked={formData.acceptTerms}
+                    name="conditions"
+                    checked={formData.conditions}
                     onChange={handleInputChange}
                     className="sr-only"
                     required
                   />
                   <div
                     className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
-                      formData.acceptTerms
+                      formData.conditions
                         ? 'bg-blue-600 border-blue-600'
-                        : errors.acceptTerms
+                        : errors.conditions
                         ? 'border-red-500'
                         : 'border-gray-300 hover:border-gray-400'
                     }`}
                   >
-                    {formData.acceptTerms && <Check className="w-3 h-3 text-white" />}
+                    {formData.conditions && <Check className="w-3 h-3 text-white" />}
                   </div>
                 </div>
                 <span className="text-sm text-gray-700 leading-5">
@@ -665,7 +542,7 @@ const RegisterClient = () => {
                   </a>
                 </span>
               </label>
-              <ErrorMessage error={errors.acceptTerms} />
+              <ErrorMessage error={errors.conditions} />
             </div>
 
             <button
