@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 const JoinWap = () => {
 const navigate = useNavigate();
 
+
+
+
   const handleRegisterRedirect = () => {
     navigate('/Registerintervenant');
   };
