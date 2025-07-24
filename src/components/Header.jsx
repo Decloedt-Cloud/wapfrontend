@@ -282,9 +282,21 @@ const Header = () => {
 							</li> */}
 						</ul>
 					</div>
-					<ul className="nav header-navbar-rht">
+					{/* <ul className="nav header-navbar-rht">
 						<li className="nav-item">
 							<a className="nav-link header-login" href="/JoinWap"><i className="feather-user"></i> Register / Login</a>
+						</li>
+					</ul> */}
+					<ul className="nav header-navbar-rht">
+						<li className="nav-item">
+							<a className="nav-link header-login" href="/JoinWap">
+							<i className="feather-user"></i> Login
+							</a>
+						</li>
+						<li className="nav-item">
+							<a className="nav-link header-login" href="/LoginWap">
+							<i className=""></i> Rejoindre wap
+							</a>
 						</li>
 					</ul>
 				</nav>

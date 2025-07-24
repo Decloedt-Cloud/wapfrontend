@@ -8,42 +8,42 @@ const Home = () => {
     {
       icon: 'assets/img/icons/feature-icon-01.svg',
       title: 'Construction',
-      image: 'assets/img/providers/provider-32.jpg',
+      image: 'Construction.jpg',
     },
     {
       icon: 'assets/img/icons/feature-icon-02.svg',
       title: 'Car Wash',
-      image: 'assets/img/providers/provider-17.jpg',
+      image: 'carwash.jpg',
     },
     {
       icon: 'assets/img/icons/feature-icon-03.svg',
       title: 'Electrical',
-      image: 'assets/img/services/service-63.jpg',
+      image: 'electrical.jpg',
     },
     {
       icon: 'assets/img/icons/feature-icon-04.svg',
       title: 'Cleaning',
-      image: 'assets/img/services/service-09.jpg',
+      image: 'Cleaning.jpg',
     },
     {
       icon: 'assets/img/icons/feature-icon-05.svg',
       title: 'Interior',
-      image: 'assets/img/services/service-07.jpg',
+      image: 'interior.jpg',
     },
     {
       icon: 'assets/img/icons/feature-icon-06.svg',
-      title: 'Carpentry',
-      image: 'assets/img/providers/provider-01.jpg',
+      title: 'Menuiserie',
+      image: 'Menuiserie.jpg',
     },
     {
       icon: 'assets/img/icons/feature-icon-07.svg',
-      title: 'Computer',
-      image: 'assets/img/services/service-62.jpg',
+      title: 'Cleaning',
+      image: 'Cleaning.jpg',
     },
     {
       icon: 'assets/img/icons/feature-icon-08.svg',
       title: 'Plumbing',
-      image: 'assets/img/providers/provider-07.jpg',
+      image: 'plumbing.jpg',
     },
   ]
 
@@ -78,13 +78,13 @@ const Home = () => {
 									<div className="search-input-new line">
 										<i className="fas fa-tv bficon"></i>
 										<div className="form-group mb-0">
-											<input type="text" className="form-control" placeholder="What are you looking for?" />
+											<input type="text" className="form-control" placeholder="Que recherchez-vous ?" />
 										</div>
 									</div>
 									<div className="search-input-new">
 										<i className="fas fa-location-arrow bficon"></i>
 										<div className="form-group mb-0">
-											<input type="text" className="form-control" placeholder="Your Location" /> 
+											<input type="text" className="form-control" placeholder="Votre emplacement" /> 
 										</div>
 									</div>
 									<div className="search-btn">
@@ -237,7 +237,7 @@ const Home = () => {
 						</div>
 					</div>
 					<div className="col-md-6 text-md-end aos" data-aos="fade-up">
-						<a href="categories.html" className="btn btn-primary btn-view rounded-pill">View All</a>
+						<a href="categories.html" className="btn btn-primary btn-view rounded-pill">Voir tout</a>
 					</div>
 				</div>
 				<div className="row justify-content-center">
@@ -248,7 +248,7 @@ const Home = () => {
 									<img className="img-fluid serv-img" alt="Service Image" src="assets/img/categories/categories-07.jpg"/>
 								</a>
 								<div className="fav-item">
-									<a href="categories.html"><span className="item-cat">Cleaning</span></a>
+									<a href="categories.html"><span className="item-cat">Nettoyage</span></a>
 									<a href="javascript:void(0)" className="fav-icon">
 										<i className="feather-heart"></i>
 									</a>
@@ -259,7 +259,7 @@ const Home = () => {
 							</div>
 							<div className="service-content">
 								<h3 className="title">
-									<a href="service-details.html">Toughened Glass Fitting Services</a>
+									<a href="service-details.html">Services d'installation de verre trempé</a>
 								</h3>
 								<p><i className="feather-map-pin me-2"></i>Chicago, USA<span className="rate"><i className="feather-phone me-2"></i>301-591-8194</span></p>
 								<div className="serv-info">
@@ -294,7 +294,7 @@ const Home = () => {
 							</div>
 							<div className="service-content">
 								<h3 className="title">
-									<a href="service-details.html">Car Repair Services</a>
+									<a href="service-details.html">Services de réparation automobile</a>
 								</h3>
 								<p><i className="feather-map-pin me-2"></i>Montana, USA<span className="rate"><i className="feather-phone me-2"></i>615-325-1630</span></p>
 								<div className="serv-info">
@@ -318,7 +318,7 @@ const Home = () => {
 									<img className="img-fluid serv-img" alt="Service Image" src="assets/img/categories/categories-09.jpg"/>
 								</a>
 								<div className="fav-item">
-									<a href="categories.html"><span className="item-cat">Carpentry</span></a>
+									<a href="categories.html"><span className="item-cat">Menuiserie</span></a>
 									<a href="javascript:void(0)" className="fav-icon">
 										<i className="feather-heart"></i>
 									</a>
@@ -329,7 +329,7 @@ const Home = () => {
 							</div>
 							<div className="service-content">
 								<h3 className="title">
-									<a href="service-details.html">Electric Panel Repairing Service</a>
+									<a href="service-details.html">Service de réparation de tableau électrique</a>
 								</h3>
 								<p><i className="feather-map-pin me-2"></i>Montana, USA<span className="rate"><i className="feather-phone me-2"></i>901-489-4357</span></p>
 								<div className="serv-info">
@@ -705,31 +705,35 @@ const Home = () => {
 					<div className="col-lg-4 col-sm-12">
 						<div className="pricing-plans price-new">
 							<div className="pricing-planshead">
-								<h6>x<span>/month</span></h6>
+								<h6>x<span>/mois</span></h6>
 								<h4>Starter</h4>
-								<h5>Basic service description and up to 3 images</h5>
+								<h5>Description de service de base et jusqu'à 3 images</h5>
 							</div>
 							<div className="pricing-planscontent">
 								<ul>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
-										<span>Ability to list up to 3 services</span>
+										<span>Possibilité de lister jusqu’à 3 services</span>
 									</li>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
-										<span>Access to buyer inquiries</span>
+										<span>Accès aux demandes des acheteurs</span>
 									</li>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
-										<span>3% transaction fee on sales</span>
+										<span>Frais de transaction de 3 % sur les ventes</span>
 									</li>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
-										<span>New service providers can test platform.</span>
+										<span>Les nouveaux prestataires peuvent tester la plateforme.</span>
+									</li>
+									<li>
+										<i className="fa fa-check-circle me-2"></i>
+										<span>Les nouveaux prestataires peuvent tester la plateforme.</span>
 									</li>
 								</ul>
 								<div className="pricing-btn">
-									<a href="search.html" className="btn btn-view">Choose Plan</a>
+									<a href="search.html" className="btn btn-view">Choisir un plan</a>
 								</div>
 							</div>
 						</div>
@@ -738,37 +742,37 @@ const Home = () => {
 						<div className="pricing-plans price-new active">
 							<div className="pricing-planshead">
 								<div className="price-block">
-									<span className="popular">MOST POPULAR</span>
+									<span className="popular">LE PLUS POPULAIRE</span>
 								</div>
-								<h6>x<span>/month</span></h6>
-								<h4>Company</h4>
-								<h5>Enhanced service description with video support</h5>
+								<h6>x<span>/mois</span></h6>
+								<h4>Entreprise</h4>
+                    			<h5>Description améliorée du service avec support vidéo</h5>
 							</div>
 							<div className="pricing-planscontent">
 								<ul>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
-										<span>Ability to list up to 10 services</span>
+										<span>Possibilité de lister jusqu’à 10 services</span>
 									</li>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
-										<span>Up to 10 images per service</span>
+										<span>Jusqu’à 10 images par service</span>
 									</li>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
-										<span>Custom pricing for enterprise-level service</span>
+										<span>Tarification personnalisée pour les services de niveau entreprise</span>
 									</li>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
-										<span>3% transaction fee on sales</span>
+										<span>Frais de transaction de plus de 3 % sur les ventes</span>
 									</li>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
-										<span>New service providers can test the platform.</span>
+										<span>Les nouveaux prestataires peuvent tester la plateforme</span>
 									</li>
 								</ul>
 								<div className="pricing-btn">
-									<a href="search.html" className="btn btn-view">Choose Plan</a>
+									<a href="search.html" className="btn btn-view">Choisir un plan</a>
 								</div>
 							</div>
 						</div>
@@ -776,23 +780,27 @@ const Home = () => {
 					<div className="col-lg-4 col-sm-12">
 						<div className="pricing-plans price-new">
 							<div className="pricing-planshead">
-								<h6>x<span>/month</span></h6>
-								<h4>Professional</h4>
-								<h5>Advanced service with multiple media types</h5>
+								<h6>x<span>/mois</span></h6>
+								<h4>Professionnel </h4>
+                    			<h5>Service avancé avec plusieurs types de médias</h5>
 							</div>
 							<div className="pricing-planscontent">
 								<ul>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
-										<span>Unlimited service listings</span>
+										<span>Nombre illimité d’annonces de services</span>
+									</li>
+									<li>
+									<i className="fa fa-check-circle me-2" />
+										<span>Images illimitées par service</span>
 									</li>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
-										<span>Unlimited images per service</span>
+										<span>Tarification personnalisée pour les services de niveau entreprise</span>
 									</li>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
-										<span>Custom pricing for enterprise-level service</span>
+										<span>Frais de transaction de 2 % sur les ventes</span>
 									</li>
 									<li>
 										<i className="fa fa-check-circle me-2"></i>
@@ -853,8 +861,8 @@ const Home = () => {
 				<div className="row">
 					<div className="col-md-12 text-center">
 						<div className="section-heading sec-header aos" data-aos="fade-up">
-							<h2>Testimonials</h2>
-							<p>Description highlights the value of client feedback, showcases real testimonials</p>
+							<h2>Ils Parlent De Nous</h2>
+                			<p>Découvrez les témoignages authentiques de nos clients satisfaits </p>
 						</div>
 					</div>
 				</div>
@@ -869,11 +877,8 @@ const Home = () => {
 									<i className="fas fa-star filled"></i>
 									<i className="fas fa-star filled"></i>
 								</div>
-								<h6>“The best service”</h6>
-								<p>
-									Versatile and user-friendly platform for freelancers and businesses alike. Its interface is 
-									clean and intuitive, making it easy to 
-									post jobs, browse profiles, and manage projects. The range of services is impressive,
+								 <p>
+								“WAP m’a permis de trouver une aide pour mon père en quelques jours, sans stress ni complications.”
 								</p>
 							</div>
 							<div className="client-img">
@@ -881,8 +886,8 @@ const Home = () => {
 									<img className="img-fluid" alt="Image" src="assets/img/profiles/avatar-01.jpg"/>
 								</a>
 								<div className="client-name">
-									<h5>Sophie Moore</h5>
-									<h6>Head of Design at Google</h6>
+									<h5>Sabrina</h5>
+                    				<h6>aidante familiale</h6>
 								</div>
 							</div>
 						</div>
@@ -897,10 +902,8 @@ const Home = () => {
 									<i className="fas fa-star filled"></i>
 									<i className="fas fa-star filled"></i>
 								</div>
-								<h6>“Awesome Works”</h6>
 								<p>
-									Excels in providing a quick and easy way to find help for everyday tasks and home repairs. 
-									The platform is straightforward, allowing users to post tasks and receive  from local 
+								“Grâce à WAP, je travaille à mon rythme avec des familles proches de chez moi.”
 								</p>
 							</div>
 							<div className="client-img">
@@ -908,8 +911,8 @@ const Home = () => {
 									<img className="img-fluid" alt="Image" src="assets/img/profiles/avatar-02.jpg"/>
 								</a>
 								<div className="client-name">
-									<h5>Mike Hussy</h5>
-									<h6>Tech Lead</h6>
+									<h5>Kevin</h5>
+                    				<h6>intervenant à domicile</h6>
 								</div>
 							</div>
 						</div>
@@ -924,11 +927,9 @@ const Home = () => {
 									<i className="fas fa-star filled"></i>
 									<i className="fas fa-star filled"></i>
 								</div>
-								<h6>“Brilliant Work”</h6>
+								{/* <h6>“Brilliant Work”</h6> */}
 								<p>
-									Offers a comprehensive marketplace for finding local service professionals across 
-									a wide range of categories, including home improvement, events, and personal services. 
-									The platform is user-friendly, 
+								“L’accompagnement personnalisé de WAP a transformé la vie de ma mère, un vrai soulagement !”
 								</p>
 							</div>
 							<div className="client-img">
@@ -936,8 +937,8 @@ const Home = () => {
 									<img className="img-fluid" alt="Image" src="assets/img/profiles/avatar-03.jpg"/>
 								</a>
 								<div className="client-name">
-									<h5>Tom Beker</h5>
-									<h6>Ads Chairman</h6>
+									<h5>Sophie</h5>
+                    				<h6>fille d’un senior</h6>
 								</div>
 							</div>
 						</div>
