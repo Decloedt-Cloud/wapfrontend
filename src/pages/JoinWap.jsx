@@ -8,7 +8,6 @@ const navigate = useNavigate();
   const handleRegisterRedirect = () => {
     navigate('/Registerintervenant');
   };
-
   const handleRegisterClient = () => {
     navigate('/RegisterClient');
   };
