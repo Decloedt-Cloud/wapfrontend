@@ -9,6 +9,8 @@ const navigate = useNavigate();
     navigate('/Registerintervenant');
   };
 
+
+  
   const handleRegisterClient = () => {
     navigate('/RegisterClient');
   };
