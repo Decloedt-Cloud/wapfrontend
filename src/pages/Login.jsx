@@ -273,7 +273,7 @@ const Login = () => {
           <div className="mt-6 text-center space-y-2">
             <p className="text-sm text-gray-600">
               <a 
-                href="/forgot-password" 
+                href="/RequestforgetPassword" 
                 className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
               >
                 Mot de passe oublié ?
