@@ -19364,7 +19364,7 @@ fieldset.booking-content#first-field {
 
 .feature-box {
   background: #fff;
-  box-shadow: 0px 10px 20px -5px rgba(76, 64, 237, 0.08);
+  /* box-shadow: 0px 10px 20px -5px rgba(76, 64, 237, 0.08); */
   padding: 25px;
   text-align: center;
   margin-bottom: 1.5rem;
@@ -20604,7 +20604,7 @@ fieldset.booking-content#first-field {
 }
 
 .footer-logo img {
-  max-height: 35px;
+  max-height: 65px;
 }
 
 .footer-contact-info .footer-address {
