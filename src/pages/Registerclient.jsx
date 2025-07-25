@@ -194,6 +194,7 @@ const RegisterClient = () => {
           localStorage.setItem('user', JSON.stringify(response.data.user));
           
           // Show success popup
+          
           setShowSuccessPopup(true);
           setTimeout(() => {
             setShowSuccessPopup(false);
