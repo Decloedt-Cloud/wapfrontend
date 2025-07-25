@@ -31,7 +31,7 @@ const RequestforgetPassword = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post('http://wapback.hellowap.com/api/forgot-password', { email });
+      const response = await axios.post('http://localhost:8000/api/forgot-password', { email });
 
       if (response.data && response.data.message) {
         setSuccess(response.data.message);

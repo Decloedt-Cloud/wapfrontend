@@ -272,7 +272,7 @@ const Registerintervenant = () => {
         };
 
         // URL complète vers backend Laravel
-        const response = await axios.post('http://wapback.hellowap.com/api/register-intervenant', payload);
+        const response = await axios.post('http://localhost:8000/api/register-intervenant', payload);
 
         if (response.status === 201) {
           setShowSuccessPopup(true);
