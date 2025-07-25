@@ -10,7 +10,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import RequestforgetPassword from './pages/RequestforgetPassword';
 import ResetPassword from './pages/Resetpassword';
-import Confirmregisterpopup from './pages/Confirmregisterpopup';
+
 // Création d'un wrapper pour gérer la logique d'affichage de Header/Footer
 function LayoutWrapper() {
   const location = useLocation();
@@ -28,7 +28,6 @@ function LayoutWrapper() {
         <Route path='/Dashboard' element={<Dashboard />} />
            <Route path='/RequestforgetPassword' element={<RequestforgetPassword />} />
         <Route path='/Resetpassword' element={<ResetPassword />} />
-        <Route path='/Confirmregisterpopup' element={<Confirmregisterpopup />} />
       </Routes>
       {!hideHeaderFooter && <Footer />}
     </>
