@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // ajoute ceci en haut
 import { Lock, Mail, ArrowLeft } from 'lucide-react';
 
 const RequestforgetPassword = () => {
@@ -18,25 +19,32 @@ const RequestforgetPassword = () => {
     setSuccess('');
 
     if (!email.trim()) {
-      setError('L\'adresse email est requise.');
+      setError("L'adresse email est requise.");
       return;
     }
 
     if (!validateEmail(email)) {
-      setError('Format d\'email invalide.');
+      setError("Format d'email invalide.");
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      // Simulation d'un appel API pour envoyer un email de réinitialisation
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setSuccess('Un email de réinitialisation a été envoyé. Vérifiez votre boîte de réception.');
-      setEmail('');
+      const response = await axios.post('http://wapback.hellowap.com/api/forgot-password', { email });
+
+      if (response.data && response.data.message) {
+        setSuccess(response.data.message);
+        setEmail('');
+      } else {
+        setSuccess('Email envoyé avec succès.');
+      }
     } catch (err) {
-      setError('Une erreur est survenue. Veuillez réessayer.');
-      console.error('Erreur:', err);
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("Une erreur est survenue. Veuillez réessayer.");
+      }
     } finally {
       setIsSubmitting(false);
     }

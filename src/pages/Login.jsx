@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +14,8 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loginError, setLoginError] = useState('');
+  const navigate = useNavigate();
+
 
   const validateField = (name, value) => {
     let error = '';
@@ -39,7 +45,7 @@ const Login = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
+
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -56,57 +62,104 @@ const Login = () => {
     }
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   // Validate all fields
+  //   const newErrors = {};
+  //   Object.keys(formData).forEach(key => {
+  //     const error = validateField(key, formData[key]);
+  //     if (error) newErrors[key] = error;
+  //   });
+
+  //   setErrors(newErrors);
+
+  //   if (Object.keys(newErrors).length === 0) {
+  //     setIsSubmitting(true);
+  //     setLoginError(''); // Clear previous login error
+
+  //     try {
+  //       // Simulation d'appel API - remplacez par votre endpoint réel
+  //       await new Promise(resolve => setTimeout(resolve, 1000));
+
+  //       // Simuler une vérification d'identifiants (exemple)
+  //       const validEmail = 'user@example.com';
+  //       const validPassword = 'Password123!';
+  //       if (formData.email === validEmail && formData.password === validPassword) {
+  //         // Simuler une session active de 30 minutes
+  //         const sessionTimeout = 30 * 60 * 1000; // 30 minutes en millisecondes
+  //         localStorage.setItem('sessionActive', 'true');
+  //         localStorage.setItem('sessionTimeout', Date.now() + sessionTimeout);
+
+  //         // Rediriger vers l'espace personnel (simulé avec une alerte pour cet exemple)
+  //         alert('Connexion réussie ! Redirection vers votre espace personnel...');
+
+  //         // Reset form
+  //         setFormData({
+  //           email: '',
+  //           password: '',
+  //         });
+  //         setErrors({});
+  //       } else {
+  //         throw new Error('Identifiants incorrects');
+  //       }
+  //     } catch (error) {
+  //       setLoginError('Identifiants incorrects. Veuillez vérifier votre email et mot de passe.');
+  //       console.error('Erreur de connexion:', error);
+  //     } finally {
+  //       setIsSubmitting(false);
+  //     }
+  //   }
+  // };
+
+  // Vérifier l'inactivité et déconnecter après 30 minutes
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Validate all fields
+
+    setErrors({});
+    setLoginError('');
+
+    // Validation
     const newErrors = {};
-    Object.keys(formData).forEach(key => {
+    Object.keys(formData).forEach((key) => {
       const error = validateField(key, formData[key]);
       if (error) newErrors[key] = error;
     });
 
-    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
-    if (Object.keys(newErrors).length === 0) {
-      setIsSubmitting(true);
-      setLoginError(''); // Clear previous login error
+    setIsSubmitting(true);
 
-      try {
-        // Simulation d'appel API - remplacez par votre endpoint réel
-        await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await axios.post('http://wapback.hellowap.com/api/login', {
+        email: formData.email,
+        password: formData.password,
+      });
 
-        // Simuler une vérification d'identifiants (exemple)
-        const validEmail = 'user@example.com';
-        const validPassword = 'Password123!';
-        if (formData.email === validEmail && formData.password === validPassword) {
-          // Simuler une session active de 30 minutes
-          const sessionTimeout = 30 * 60 * 1000; // 30 minutes en millisecondes
-          localStorage.setItem('sessionActive', 'true');
-          localStorage.setItem('sessionTimeout', Date.now() + sessionTimeout);
+      const data = response.data;
 
-          // Rediriger vers l'espace personnel (simulé avec une alerte pour cet exemple)
-          alert('Connexion réussie ! Redirection vers votre espace personnel...');
-          
-          // Reset form
-          setFormData({
-            email: '',
-            password: '',
-          });
-          setErrors({});
-        } else {
-          throw new Error('Identifiants incorrects');
-        }
-      } catch (error) {
-        setLoginError('Identifiants incorrects. Veuillez vérifier votre email et mot de passe.');
-        console.error('Erreur de connexion:', error);
-      } finally {
-        setIsSubmitting(false);
+      if (data.token) {
+        localStorage.setItem('token', data.token);
       }
+      setFormData({ email: '', password: '' });
+      setErrors({});
+      // Redirection après succès
+      navigate('/Dashboard');
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.message) {
+        setLoginError(error.response.data.message);
+      } else {
+        setLoginError("Erreur de connexion. Veuillez réessayer.");
+      }
+      console.error("Erreur lors de la connexion :", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  // Vérifier l'inactivité et déconnecter après 30 minutes
   useEffect(() => {
     let inactivityTimer;
     const resetInactivityTimer = () => {
@@ -240,24 +293,24 @@ const Login = () => {
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center">
-                  <svg 
-                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    fill="none" 
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
-                    <circle 
-                      className="opacity-25" 
-                      cx="12" 
-                      cy="12" 
-                      r="10" 
-                      stroke="currentColor" 
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
                       strokeWidth="4"
                     />
-                    <path 
-                      className="opacity-75" 
-                      fill="currentColor" 
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     />
                   </svg>
@@ -272,8 +325,8 @@ const Login = () => {
           {/* Footer */}
           <div className="mt-6 text-center space-y-2">
             <p className="text-sm text-gray-600">
-              <a 
-                href="/RequestforgetPassword" 
+              <a
+                href="/RequestforgetPassword"
                 className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
               >
                 Mot de passe oublié ?
@@ -281,8 +334,8 @@ const Login = () => {
             </p>
             <p className="text-sm text-gray-600">
               Pas encore de compte ?{' '}
-              <a 
-                href="/JoinWap" 
+              <a
+                href="/JoinWap"
                 className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
               >
                 S'inscrire
