@@ -1,6 +1,7 @@
-import React, { } from "react";
 import Header from "../components/Header";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import SearchLocation from "../components/SearchLocation"; 
 
 
 const Home = () => {
@@ -81,15 +82,20 @@ const Home = () => {
 											<input type="text" className="form-control" placeholder="Que recherchez-vous ?" />
 										</div>
 									</div>
+								
 									<div className="search-input-new">
 										<i className="fas fa-location-arrow bficon"></i>
-										<div className="form-group mb-0">
-											<input type="text" className="form-control" placeholder="Votre emplacement" /> 
-										</div>
-									</div>
+										{/* <div className="form-group mb-0">
+											<input type="text" className="form-control" placeholder="Votre emplacement" />
+										</div> */}
+										<SearchLocation/>
+									</div>	
+									
 									<div className="search-btn">
-										<button className="btn search_service" type="submit"><i className="feather-search me-2"></i>  Recherche</button>
+										<button className="btn search_service" type="button"><i className="feather-search me-2"></i>  Recherche</button>
 									</div>
+									 
+									
 								</form>
 							</div>
 						</div>
@@ -120,9 +126,9 @@ const Home = () => {
               </p>
             </div>
             <div className="col-md-6 text-md-end" data-aos="fade-up">
-              <Link to="/categories" className="btn btn-primary">
+              {/* <Link to="/" className="btn btn-primary">
                  Voir tout <i className="ti ti-arrow-right ms-1"></i>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
@@ -130,7 +136,7 @@ const Home = () => {
         <div className="row">
           {features.map((item, index) => (
             <div key={index} className="col-md-6 col-lg-3">
-              <Link to="/service-details" className="feature-box d-block" data-aos="fade-up">
+              <Link to="/" className="feature-box d-block" data-aos="fade-up">
                 <div className="feature-icon">
                   <span>
                     <img src={item.icon} alt={item.title} />
@@ -154,8 +160,8 @@ const Home = () => {
             <h2 >
               Trouvez l’aide à domicile qui vous ressemble
             </h2>
-            <div className="h4 text-uppercase mb-4">
-              POUR VOUS, POUR UN PROCHE, POUR AUJOURD’HUI… ET POUR DEMAIN.
+            <div className="h4 mb-4">
+              Pour vous, pour un proche, pour aujourd’hui… Et pour demain.
             </div>
             <p>
             
@@ -164,7 +170,7 @@ const Home = () => {
               simplifiez toutes vos démarches administratives.
               <br />
               Notre mission ?<br />
-              👉 Vous offrir une aide adaptée, bienveillante et sécurisée, pour un
+              Vous offrir une aide adaptée, bienveillante et sécurisée, pour un
               quotidien plus serein à domicile.
             </p>
             <div
@@ -236,30 +242,30 @@ const Home = () => {
 							</p>
 						</div>
 					</div>
-					<div className="col-md-6 text-md-end aos" data-aos="fade-up">
-						<a href="categories.html" className="btn btn-primary btn-view rounded-pill">Voir tout</a>
-					</div>
+					{/* <div className="col-md-6 text-md-end aos" data-aos="fade-up">
+						<a href="/" className="btn btn-primary btn-view rounded-pill">Voir tout</a>
+					</div> */}
 				</div>
 				<div className="row justify-content-center">
 					<div className="col-lg-4 col-md-6">
 						<div className="service-widget service-two aos" data-aos="fade-up">
 							<div className="service-img">
-								<a href="service-details.html">
+								<a href="/">
 									<img className="img-fluid serv-img" alt="Service Image" src="assets/img/categories/categories-07.jpg"/>
 								</a>
 								<div className="fav-item">
-									<a href="categories.html"><span className="item-cat">Nettoyage</span></a>
-									<a href="javascript:void(0)" className="fav-icon">
+									<a href="/"><span className="item-cat">Nettoyage</span></a>
+									<a href="/" className="fav-icon">
 										<i className="feather-heart"></i>
 									</a>
 								</div>
 								<div className="item-info">
-									<a href="providers.html"><span className="item-img"><img src="assets/img/profiles/avatar-01.jpg" className="avatar" alt="User"/> Jeny Doe</span></a>
+									<a href="/"><span className="item-img"><img src="assets/img/profiles/avatar-01.jpg" className="avatar" alt="User"/> Jeny Doe</span></a>
 								</div>
 							</div>
 							<div className="service-content">
 								<h3 className="title">
-									<a href="service-details.html">Services d'installation de verre trempé</a>
+									<a href="/">Services d'installation de verre trempé</a>
 								</h3>
 								<p><i className="feather-map-pin me-2"></i>Chicago, USA<span className="rate"><i className="feather-phone me-2"></i>301-591-8194</span></p>
 								<div className="serv-info">
@@ -279,12 +285,12 @@ const Home = () => {
 					<div className="col-lg-4 col-md-6">
 						<div className="service-widget service-two aos" data-aos="fade-up">
 							<div className="service-img">
-								<a href="service-details.html">
+								<a href="/">
 									<img className="img-fluid serv-img" alt="Service Image" src="assets/img/categories/categories-08.jpg"/>
 								</a>
 								<div className="fav-item">
-									<a href="categories.html"><span className="item-cat">Construction</span></a>
-									<a href="javascript:void(0)" className="fav-icon">
+									<a href="/"><span className="item-cat">Construction</span></a>
+									<a href="/" className="fav-icon">
 										<i className="feather-heart"></i>
 									</a>
 								</div>
@@ -294,7 +300,7 @@ const Home = () => {
 							</div>
 							<div className="service-content">
 								<h3 className="title">
-									<a href="service-details.html">Services de réparation automobile</a>
+									<a href="/">Services de réparation automobile</a>
 								</h3>
 								<p><i className="feather-map-pin me-2"></i>Montana, USA<span className="rate"><i className="feather-phone me-2"></i>615-325-1630</span></p>
 								<div className="serv-info">
@@ -314,7 +320,7 @@ const Home = () => {
 					<div className="col-lg-4 col-md-6">
 						<div className="service-widget service-two aos" data-aos="fade-up">
 							<div className="service-img">
-								<a href="service-details.html">
+								<a href="/">
 									<img className="img-fluid serv-img" alt="Service Image" src="assets/img/categories/categories-09.jpg"/>
 								</a>
 								<div className="fav-item">
@@ -329,7 +335,7 @@ const Home = () => {
 							</div>
 							<div className="service-content">
 								<h3 className="title">
-									<a href="service-details.html">Service de réparation de tableau électrique</a>
+									<a href="/">Service de réparation de tableau électrique</a>
 								</h3>
 								<p><i className="feather-map-pin me-2"></i>Montana, USA<span className="rate"><i className="feather-phone me-2"></i>901-489-4357</span></p>
 								<div className="serv-info">
@@ -428,7 +434,7 @@ const Home = () => {
 								
 							<div className="service-widget service-two aos" data-aos="fade-up">
 								<div className="service-img">
-									<a href="service-details.html">
+									<a href="/">
 										<img className="img-fluid serv-img" alt="Service Image" src="assets/img/categories/categories-10.jpg"/>
 									</a>
 									<div className="fav-item">
@@ -443,7 +449,7 @@ const Home = () => {
 								</div>
 								<div className="service-content">
 									<h3 className="title">
-										<a href="service-details.html">Commercial Painting Services</a>
+										<a href="/">Commercial Painting Services</a>
 									</h3>
 									<p><i className="feather-map-pin me-1"></i>Maryland, USA<span className="rate"><i className="feather-phone"></i>870-893-9351</span></p>
 									<div className="serv-info">
@@ -461,7 +467,7 @@ const Home = () => {
 							</div>
 							<div className="service-widget service-two aos" data-aos="fade-up">
 								<div className="service-img">
-									<a href="service-details.html">
+									<a href="/">
 										<img className="img-fluid serv-img" alt="Service Image" src="assets/img/categories/categories-11.jpg"/>
 									</a>
 									<div className="fav-item">
@@ -476,7 +482,7 @@ const Home = () => {
 								</div>
 								<div className="service-content">
 									<h3 className="title">
-										<a href="service-details.html">Wooden Carpentry Work</a>
+										<a href="/">Wooden Carpentry Work</a>
 									</h3>
 									<p><i className="feather-map-pin me-1"></i>Alabama, USA<span className="rate"><i className="feather-phone"></i>248-905-6719</span></p>
 									<div className="serv-info">
@@ -494,7 +500,7 @@ const Home = () => {
 							</div>
 							<div className="service-widget service-two aos" data-aos="fade-up">
 								<div className="service-img">
-									<a href="service-details.html">
+									<a href="/">
 										<img className="img-fluid serv-img" alt="Service Image" src="assets/img/categories/categories-12.jpg"/>
 									</a>
 									<div className="fav-item">
@@ -509,7 +515,7 @@ const Home = () => {
 								</div>
 								<div className="service-content">
 									<h3 className="title">
-										<a href="service-details.html">House Cleaning Services</a>
+										<a href="/">House Cleaning Services</a>
 									</h3>
 									<p><i className="feather-map-pin me-1"></i>California, USA<span className="rate"><i className="feather-phone"></i>636-527-0374</span></p>
 									<div className="serv-info">
@@ -527,7 +533,7 @@ const Home = () => {
 							</div>
 							<div className="service-widget service-two aos" data-aos="fade-up">
 								<div className="service-img">
-									<a href="service-details.html">
+									<a href="/">
 										<img className="img-fluid serv-img" alt="Service Image" src="assets/img/services/service-08.jpg"/>
 									</a>
 									<div className="fav-item">
@@ -542,7 +548,7 @@ const Home = () => {
 								</div>
 								<div className="service-content">
 									<h3 className="title">
-										<a href="service-details.html">Steam Car Wash</a>
+										<a href="/">Steam Car Wash</a>
 									</h3>
 									<p><i className="feather-map-pin me-1"></i>Texas, USA<span className="rate"><i className="feather-phone"></i>908-734-7033</span></p>
 									<div className="serv-info">
@@ -733,7 +739,7 @@ const Home = () => {
 									</li>
 								</ul>
 								<div className="pricing-btn">
-									<a href="search.html" className="btn btn-view">Choisir un plan</a>
+									<a href="/" className="btn btn-view">Choisir un plan</a>
 								</div>
 							</div>
 						</div>
@@ -772,7 +778,7 @@ const Home = () => {
 									</li>
 								</ul>
 								<div className="pricing-btn">
-									<a href="search.html" className="btn btn-view">Choisir un plan</a>
+									<a href="/" className="btn btn-view">Choisir un plan</a>
 								</div>
 							</div>
 						</div>
@@ -808,7 +814,7 @@ const Home = () => {
 									</li>
 								</ul>
 								<div className="pricing-btn">
-									<a href="search.html" className="btn btn-view">Choose Plan</a>
+									<a href="/" className="btn btn-view">Choisir un plan</a>
 								</div>
 							</div>
 						</div>
@@ -861,7 +867,7 @@ const Home = () => {
 				<div className="row">
 					<div className="col-md-12 text-center">
 						<div className="section-heading sec-header aos" data-aos="fade-up">
-							<h2>Ils Parlent De Nous</h2>
+							<h2>Ils parlent de nous</h2>
                 			<p>Découvrez les témoignages authentiques de nos clients satisfaits </p>
 						</div>
 					</div>

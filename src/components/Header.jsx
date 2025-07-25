@@ -32,7 +32,7 @@ const Header = () => {
 						<ul className="main-nav">
 							<li className="has-submenu megamenu active">
 								{/* <a href="javascript:void(0);">Home <i className="fas fa-chevron-down"></i></a> */}
-									<a href="javascript:void(0);">Accueil</a>
+									<a href="/">Accueil</a>
 								{/* <ul className="submenu mega-submenu">
 									<li>
 										<div className="megamenu-wrapper">
@@ -152,9 +152,9 @@ const Header = () => {
 									</li>
 								</ul> */}
 							</li>
-							{/* <li className="has-submenu">
-								<a href="javascript:void(0);">Services <i className="fas fa-chevron-down"></i></a>
-								<ul className="submenu">
+							<li className="has-submenu">
+								<a href="/howitworks">Comment ça marche</a>
+								{/* <ul className="submenu">
 									<li><a href="services-grid.html">Service Grid</a></li>
 								<li><a href="services-list.html">Service List</a></li>
 									<li className="has-submenu">
@@ -181,9 +181,9 @@ const Header = () => {
 									</ul>
 								</li>
 								<li><a href="create-service.html">Create Service</a></li>
-								</ul>
+								</ul> */}
 							</li>
-							<li className="has-submenu">
+							{/* <li className="has-submenu">
 								<a href="javascript:void(0);">Customers <i className="fas fa-chevron-down"></i></a>
 								<ul className="submenu">
 									<li><a href="user-dashboard.html">Dashboard</a></li>
@@ -289,13 +289,13 @@ const Header = () => {
 					</ul> */}
 					<ul className="nav header-navbar-rht">
 						<li className="nav-item">
-							<a className="nav-link header-login" href="/JoinWap">
-							<i className="feather-user"></i> Login
+							<a className="nav-link header-reg" href="/LoginWap">
+							<i className="feather-user"></i> Connexion
 							</a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link header-login" href="/LoginWap">
-							<i className=""></i> Rejoindre wap
+							<a className="nav-link header-login" href="/JoinWap">
+							 Se référencer
 							</a>
 						</li>
 					</ul>

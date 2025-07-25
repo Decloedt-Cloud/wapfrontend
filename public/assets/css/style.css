@@ -1375,8 +1375,8 @@ button:focus {
   color: #FFF;
 }
 .btn.btn-primary:hover, .btn.btn-primary:focus, .btn.btn-primary.focus, .btn.btn-primary:active, .btn.btn-primary.active {
-  background-color: #fd198b;
-  border: 1px solid #fd198b;
+  background-color: #299ae8;
+  border: 1px solid #299ae8;
   color: #FFF;
 }
 .btn.btn-primary-blue {
@@ -20604,7 +20604,7 @@ fieldset.booking-content#first-field {
 }
 
 .footer-logo img {
-  max-height: 65px;
+  max-height: 35px;
 }
 
 .footer-contact-info .footer-address {

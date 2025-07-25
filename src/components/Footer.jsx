@@ -21,21 +21,21 @@ const Footer = () => {
 											<span><i className="feather-phone-call"></i></span>
 											<div>
 												<h6>Tel</h6>
-												<p>310-437-2766</p>
+												<p>+33 6 45 23 78 90</p>
 											</div>
 										</div>
 										<div className="footer-address">
 											<span><i className="feather-mail"></i></span>
 											<div>
 												<h6>Email Address</h6>
-												<p>truelysell@example.com</p>
+												<p>contact@wap.com</p>
 											</div>
 										</div>
 										<div className="footer-address">
 											<span><i className="feather-map-pin"></i></span>
 											<div>
 												<h6>Address</h6>
-												<p>367 Hillcrest Lane, Irvine, California, United States</p>
+												<p>12 Rue des Lilas, 44000 Nantes, France</p>
 											</div>
 										</div>
 									</div>
@@ -47,26 +47,23 @@ const Footer = () => {
 						<div className="col-lg-3 col-md-6">
 							{/* <!-- Footer Widget --> */}
 							<div className="footer-widget footer-menu">
-								<h2 className="footer-title">Company</h2>
+								<h2 className="footer-title"> Entreprise</h2>
 								<ul>
 									<li>
-										<a href="about-us.html">About Us</a>
+										<a href="/">Accueil</a>
 									</li>
 									<li>
-										<a href="categories.html">Categories</a>
+										<a href="/">À propos</a>
 									</li>
 									<li>
-										<a href="blog-grid.html">Blogs</a>
+										<a href="/">Comment ça marche</a>
+									</li>
+									{/* <li>
+										<a href="/">Categories</a>
 									</li>
 									<li>
-										<a href="faq.html">FAQ</a>
-									</li>
-									<li>
-										<a href="blogs.html">Blog List</a>
-									</li>
-									<li>
-										<a href="#">Gallery</a>
-									</li>
+										<a href="/">FAQ</a>
+									</li> */}
 								</ul>
 							</div>
 							{/* <!-- /Footer Widget --> */}
@@ -74,26 +71,23 @@ const Footer = () => {
 						<div className="col-lg-3 col-md-6">
 							{/* <!-- Footer Widget --> */}
 							<div className="footer-widget footer-menu">
-								<h2 className="footer-title">Quick Links</h2>
+								<h2 className="footer-title">Liens rapides</h2>
 								<ul>
 									<li>
-										<a href="contact-us.html">Contact us</a>
+										<a href="/">Contact</a>
+									</li>
+									{/* <li>
+										<a href="/">Whatsapp</a>
 									</li>
 									<li>
-										<a href="customer-chat.html">Online Chat</a>
+										<a href="/">Telegram</a>
 									</li>
 									<li>
-										<a href="javascript:void(0);">Whatsapp</a>
+										<a href="/">Billetterie</a>
 									</li>
 									<li>
-										<a href="javascript:void(0);">Telegram</a>
-									</li>
-									<li>
-										<a href="javascript:void(0);">Ticketing</a>
-									</li>
-									<li>
-										<a href="javascript:void(0);">Call Center</a>
-									</li>
+										<a href="/">Centre d’appels</a>
+									</li> */}
 								</ul>
 							</div>
 							{/* <!-- /Footer Widget --> */}
@@ -103,7 +97,7 @@ const Footer = () => {
 							{/* <!-- Footer Widget --> */}
 							<div className="footer-widget footer-menu">
 								<h2 className="footer-title">Support</h2>
-								<ul>
+								{/* <ul>
 									<li>
 										<a href="javascript:void(0);">Account</a>
 									</li>
@@ -122,7 +116,7 @@ const Footer = () => {
 									<li>
 										<a href="privacy-policy.html">Privacy Policy</a>
 									</li>
-								</ul>
+								</ul> */}
 							</div>
 							{/* <!-- /Footer Widget --> */}
 						</div>
@@ -192,7 +186,7 @@ const Footer = () => {
 					<div className="copyright">
 						<div className="row align-items-center">
 							<div className="col-lg-4 col-sm-6">
-								<div className="payment-image">
+								{/* <div className="payment-image">
 									<ul>
 										<li>
 											<a href="javascript:void(0);"><img src="assets/img/payment/card-01.png" alt="img"/></a>
@@ -213,10 +207,10 @@ const Footer = () => {
 											<a href="javascript:void(0);"><img src="assets/img/payment/card-06.png" alt="img"/></a>
 										</li>
 									</ul>
-								</div>
+								</div> */}
 							</div>
 							<div className="col-lg-4 col-sm-6">
-								<div className="social-icon">
+								{/* <div className="social-icon">
 									<ul>
 										<li>
 											<a href="javascript:void(0);"><i className="fa-brands fa-facebook"></i> </a>
@@ -234,13 +228,18 @@ const Footer = () => {
 											<a href="javascript:void(0);"><i className="fa-brands fa-youtube"></i></a>
 										</li>
 									</ul>
+								</div> */}
+								{/* <!-- Copyright Menu -->								 */}
+								<div className="copyright-text">
+									<p className="mb-0">Copyright &copy; 2025. All Rights Reserved.</p>
 								</div>
+								{/* <!-- /Copyright Menu --> */}
 							</div>
 							<div className="col-lg-4 col-sm-12">
 								{/* <!-- Copyright Menu -->								 */}
-								<div className="copyright-text">
-									<p className="mb-0">Copyright &copy; 2024. All Rights Reserved.</p>
-								</div>
+								{/* <div className="copyright-text">
+									<p className="mb-0">Copyright &copy; 2025. All Rights Reserved.</p>
+								</div> */}
 								{/* <!-- /Copyright Menu --> */}
 							</div>
 						</div>
@@ -249,9 +248,7 @@ const Footer = () => {
 				</div>
 			</div>
 			{/* <!-- /Footer Bottom --> */}
-			
 		</footer>
-    
   );
 };
 

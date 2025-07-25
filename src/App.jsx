@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import JoinWap from './pages/JoinWap';
 import Header from './components/Header';
 import Register from './pages/Register';
+import HowItWorks from './pages/HowItWorks';
 
 
 
@@ -15,18 +16,19 @@ import Register from './pages/Register';
 
 function App() {
   return (
-  <>
-  
+
+<> 
  <Header/>
     <BrowserRouter>
     <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/JoinWap' element={<JoinWap/>}/>
-         <Route path='/Register' element={<Register/>}/>
+        <Route path='/Register' element={<Register/>}/>
+        <Route path='/HowItWorks' element={<HowItWorks/>}/>
     </Routes>
     </BrowserRouter>
     <Footer/>
-  </>
+  </> 
   )
 }
 
