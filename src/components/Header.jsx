@@ -289,7 +289,7 @@ const Header = () => {
 					</ul> */}
 					<ul className="nav header-navbar-rht">
 						<li className="nav-item">
-							<a className="nav-link header-reg" href="/LoginWap">
+							<a className="nav-link header-reg" href="/Login">
 							<i className="feather-user"></i> Connexion
 							</a>
 						</li>
