@@ -4,6 +4,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import JoinWap from './pages/JoinWap';
 import Header from './components/Header';
+import Register from './pages/Register';
+import HowItWorks from './pages/HowItWorks';
 import Registerintervenant from './pages/Registerintevenant';
 import RegisterClient from './pages/RegisterClient';
 import Login from './pages/Login';
@@ -11,7 +13,7 @@ import Dashboard from './pages/Dashboard';
 import RequestforgetPassword from './pages/RequestforgetPassword';
 import ResetPassword from './pages/Resetpassword';
 import Confirmregisterpopup from './pages/Confirmregisterpopup';
-// Création d'un wrapper pour gérer la logique d'affichage de Header/Footer
+
 function LayoutWrapper() {
   const location = useLocation();
   const hideHeaderFooter = location.pathname === '/Dashboard';
@@ -37,10 +39,22 @@ function LayoutWrapper() {
 
 function App() {
   return (
+
+
+<> 
+ <Header/>
     <BrowserRouter>
-      <LayoutWrapper />
+    <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/JoinWap' element={<JoinWap/>}/>
+        <Route path='/Register' element={<Register/>}/>
+        <Route path='/HowItWorks' element={<HowItWorks/>}/>
+    </Routes>
     </BrowserRouter>
-  );
+    <Footer/>
+  </> 
+  )
+
 }
 
 export default App;
