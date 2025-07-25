@@ -186,7 +186,7 @@ const RegisterClient = () => {
           conditions: formData.conditions,
         };
 
-        const response = await axios.post('http://localhost:8000/api/register-client', payload);
+        const response = await axios.post('http://wapback.hellowap.com/api/register-client', payload);
 
         if (response.status === 201) {
           // Store token in localStorage

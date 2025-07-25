@@ -33,6 +33,8 @@ const Dashboard = () => {
     avatar: null
   });
 
+  
+
   // Données simulées
   const stats = [
     { label: 'Chiffre d\'affaires', value: '45 230 €', change: '+12%', icon: DollarSign, color: 'text-green-600', bgColor: 'bg-green-100' },

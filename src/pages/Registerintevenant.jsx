@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Eye, EyeOff, User, Building, Briefcase, MapPin, Mail, Phone, Lock, Check } from 'lucide-react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Registerintervenant = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +28,8 @@ const Registerintervenant = () => {
   const [addressSuggestions, setAddressSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const autocompleteRef = useRef(null);
+  const navigate = useNavigate();
+
 
   const companyTypes = [
     'Sélectionner le type d\'entreprise',
@@ -177,37 +183,109 @@ const Registerintervenant = () => {
     }));
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const newErrors = {};
+  //   Object.keys(formData).forEach((key) => {
+  //     const error = validateField(key, formData[key]);
+  //     if (error) newErrors[key] = error;
+  //   });
+  //   setErrors(newErrors);
+  //   if (Object.keys(newErrors).length === 0) {
+  //     setIsSubmitting(true);
+  //     try {
+  //       const response = await fetch('/api/signup', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({
+  //           ...formData,
+  //           phone: `${formData.indicatif}${formData.phone}`,
+  //         }),
+  //       });
+  //       if (response.ok) {
+  //         await fetch('/api/send-validation-email', {
+  //           method: 'POST',
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //           },
+  //           body: JSON.stringify({ email: formData.email }),
+  //         });
+  //         setShowSuccessPopup(true);
+  //         setTimeout(() => setShowSuccessPopup(false), 5000);
+  //         setFormData({
+  //           companyType: '',
+  //           companyName: '',
+  //           activity: '',
+  //           city: '',
+  //           address: '',
+  //           indicatif: '',
+  //           phone: '',
+  //           email: '',
+  //           password: '',
+  //           confirmPassword: '',
+  //           acceptTerms: false,
+  //         });
+  //         setErrors({});
+  //         setAddressSuggestions([]);
+  //         setShowSuggestions(false);
+  //       } else {
+  //         throw new Error('Erreur lors de l\'inscription');
+  //       }
+  //     } catch (error) {
+  //       alert('Une erreur est survenue lors de l\'inscription. Veuillez réessayer.');
+  //       console.error('Erreur d\'inscription:', error);
+  //     } finally {
+  //       setIsSubmitting(false);
+  //     }
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation locale
     const newErrors = {};
     Object.keys(formData).forEach((key) => {
       const error = validateField(key, formData[key]);
       if (error) newErrors[key] = error;
     });
     setErrors(newErrors);
+
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
+
       try {
-        const response = await fetch('/api/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            ...formData,
-            phone: `${formData.indicatif}${formData.phone}`,
-          }),
-        });
-        if (response.ok) {
-          await fetch('/api/send-validation-email', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: formData.email }),
-          });
+        // Préparer payload avec noms attendus côté Laravel
+        const payload = {
+          name: formData.companyName,
+          email: formData.email,
+          password: formData.password,
+          password_confirmation: formData.confirmPassword,
+          type_entreprise: formData.companyType,
+          nom_entreprise: formData.companyName,
+          activite_entreprise: formData.activity,
+          ville: formData.city,
+          adresse: formData.address,
+          telephone: `${formData.indicatif}${formData.phone}`,
+          conditions: formData.acceptTerms,
+        };
+
+        // URL complète vers backend Laravel
+        const response = await axios.post('http://wapback.hellowap.com/api/register-intervenant', payload);
+
+        if (response.status === 201) {
           setShowSuccessPopup(true);
           setTimeout(() => setShowSuccessPopup(false), 5000);
+
+
+          // Attendre 2 secondes puis rediriger
+          setTimeout(() => {
+            setShowSuccessPopup(false);
+            navigate('/Dashboard'); 
+          }, 2000);
+
+          // Reset formulaire
           setFormData({
             companyType: '',
             companyName: '',
@@ -222,14 +300,17 @@ const Registerintervenant = () => {
             acceptTerms: false,
           });
           setErrors({});
-          setAddressSuggestions([]);
-          setShowSuggestions(false);
         } else {
-          throw new Error('Erreur lors de l\'inscription');
+          alert('Erreur lors de l\'inscription. Veuillez réessayer.');
         }
       } catch (error) {
-        alert('Une erreur est survenue lors de l\'inscription. Veuillez réessayer.');
-        console.error('Erreur d\'inscription:', error);
+        if (error.response && error.response.data.errors) {
+          // Afficher erreurs backend si présentes
+          setErrors(error.response.data.errors);
+        } else {
+          alert('Erreur serveur. Veuillez réessayer plus tard.');
+        }
+        console.error('Erreur inscription:', error);
       } finally {
         setIsSubmitting(false);
       }
@@ -254,7 +335,7 @@ const Registerintervenant = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-16 px-6">
-   <div className="max-w-xl mx-auto px-4 sm:px-6">
+      <div className="max-w-xl mx-auto px-4 sm:px-6">
         <div className="bg-white rounded-2xl shadow-lg p-12 border border-gray-200 transition-all duration-300">
           {showSuccessPopup && (
             <div className="fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg flex items-center transition-all duration-300 transform hover:scale-105">
@@ -388,22 +469,22 @@ const Registerintervenant = () => {
             </div>
 
             <div className="flex space-x-2">
-                    <div className="w-1/4">
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            <Phone className="w-4 h-4 inline mr-2" />
-                            Indicatif *
-                          </label>
-                          <input
-                            type="text"
-                            name="indicatif"
-                            value={formData.indicatif}
-                            onChange={handleInputChange}
-                            placeholder="+33"
-                            className={inputClasses('indicatif')}
-                            required
-                          />
-                          <ErrorMessage error={errors.indicatif} />
-                        </div>
+              <div className="w-1/4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <Phone className="w-4 h-4 inline mr-2" />
+                  Indicatif *
+                </label>
+                <input
+                  type="text"
+                  name="indicatif"
+                  value={formData.indicatif}
+                  onChange={handleInputChange}
+                  placeholder="+33"
+                  className={inputClasses('indicatif')}
+                  required
+                />
+                <ErrorMessage error={errors.indicatif} />
+              </div>
               <div className="w-3/4">
                 <label className="block text-sm font-medium text-gray-700 mb-2 transition-colors duration-300 hover:text-blue-600">
                   <Phone className="w-4 h-4 inline mr-2" />
@@ -508,13 +589,12 @@ const Registerintervenant = () => {
                     required
                   />
                   <div
-                    className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-300 ${
-                      formData.acceptTerms
-                        ? 'bg-blue-600 border-blue-600'
-                        : errors.acceptTerms
+                    className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-300 ${formData.acceptTerms
+                      ? 'bg-blue-600 border-blue-600'
+                      : errors.acceptTerms
                         ? 'border-red-500'
                         : 'border-gray-300 hover:border-gray-400'
-                    }`}
+                      }`}
                   >
                     {formData.acceptTerms && <Check className="w-3 h-3 text-white" />}
                   </div>

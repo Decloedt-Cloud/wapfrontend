@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Lock, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
 const ResetPassword = () => {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState('');
+  const [expires, setExpires] = useState('');
+  const [signature, setSignature] = useState('');
+
   const [formData, setFormData] = useState({
     newPassword: '',
     confirmPassword: '',
@@ -12,7 +20,14 @@ const ResetPassword = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  useEffect(() => {
+    setEmail(searchParams.get('email') || '');
+    setExpires(searchParams.get('expires') || '');
+    setSignature(searchParams.get('signature') || '');
+  }, [searchParams]);
+
   const validatePassword = (password) => {
+    // Au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 spécial
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
   };
@@ -23,51 +38,80 @@ const ResetPassword = () => {
       ...prev,
       [name]: value,
     }));
-    setError(''); // Clear error on change
+    setError('');
   };
+
+  const inputClasses = (hasError) =>
+    `w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white ${hasError ? 'border-red-500 bg-red-50' : 'border-gray-200 hover:border-gray-300'
+    }`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
 
-    if (!formData.newPassword || !formData.confirmPassword) {
+    const { newPassword, confirmPassword } = formData;
+
+    // Basic client-side validations
+    if (!newPassword || !confirmPassword) {
       setError('Tous les champs sont requis.');
       return;
     }
 
-    if (!validatePassword(formData.newPassword)) {
-      setError('Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial (@$!%*?&).');
+    if (!validatePassword(newPassword)) {
+      setError(
+        'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial (@$!%*?&).'
+      );
       return;
     }
 
-    if (formData.newPassword !== formData.confirmPassword) {
+    if (newPassword !== confirmPassword) {
       setError('Les mots de passe ne correspondent pas.');
+      return;
+    }
+
+    if (!email || !expires || !signature) {
+      setError('Lien de réinitialisation invalide ou expiré.');
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      // Simulation d'un appel API pour réinitialiser le mot de passe
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setSuccess('Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter.');
-      setFormData({
-        newPassword: '',
-        confirmPassword: '',
+      // Prepare the payload with password_confirmation as expected by Laravel
+      const payload = {
+        email,
+        password: newPassword,
+        password_confirmation: confirmPassword,
+        expires,
+        signature,
+      };
+
+      const response = await fetch('http://wapback.hellowap.com/api/reset-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSuccess('Votre mot de passe a été réinitialisé avec succès. Vous allez être redirigé.');
+        setFormData({ newPassword: '', confirmPassword: '' });
+
+        setTimeout(() => {
+          navigate('/login'); // Redirect to login page
+        }, 3000);
+      } else {
+        setError(data.message || 'Erreur lors de la réinitialisation.');
+      }
     } catch (err) {
-      setError('Une erreur est survenue. Veuillez réessayer.');
-      console.error('Erreur:', err);
+      console.error(err);
+      setError('Erreur réseau. Veuillez réessayer.');
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  const inputClasses = (hasError) =>
-    `w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white ${
-      hasError ? 'border-red-500 bg-red-50' : 'border-gray-200 hover:border-gray-300'
-    }`;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-16 px-6 flex items-center justify-center">
@@ -85,7 +129,7 @@ const ResetPassword = () => {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6" noValidate>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2 transition-colors duration-300 hover:text-blue-600">
                 <Lock className="w-4 h-4 inline mr-2" />
@@ -136,16 +180,13 @@ const ResetPassword = () => {
                   {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
-              {error && (
-                <p className="text-red-500 text-xs mt-1 flex items-center transition-opacity duration-300">
-                  <span className="w-4 h-4 mr-1">⚠</span>
-                  {error}
-                </p>
-              )}
-              {success && (
-                <p className="text-green-500 text-xs mt-1 flex items-center transition-opacity duration-300">
-                  <span className="w-4 h-4 mr-1">✔</span>
-                  {success}
+              {(error || success) && (
+                <p
+                  className={`text-xs mt-1 flex items-center transition-opacity duration-300 ${error ? 'text-red-500' : 'text-green-500'
+                    }`}
+                >
+                  <span className="w-4 h-4 mr-1">{error ? '⚠' : '✔'}</span>
+                  {error || success}
                 </p>
               )}
             </div>
